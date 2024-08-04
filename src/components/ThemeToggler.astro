@@ -29,7 +29,7 @@
 
   const applyStoredTheme = () => {
     const storedTheme = window.localStorage.getItem(COLOUR_MODE);
-    if (storedTheme === DARK_THEME) {
+    if (storedTheme !== LIGHT_THEME) {
       document.documentElement.classList.add(DARK_THEME_CLASS);
     } else {
       document.documentElement.classList.remove(DARK_THEME_CLASS);
