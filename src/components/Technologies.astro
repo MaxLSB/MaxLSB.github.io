@@ -1,0 +1,40 @@
+---
+interface Props {
+  technologies: string[];
+}
+
+const { technologies } = Astro.props as Props;
+
+const technologyStyles: Record<string, string> = {
+  Python: 'border-[#9A9AFF] text-[#9A9AFF]',
+  Pytorch: 'border-[#9AFF9A] text-[#9AFF9A]',
+  OpenCV: 'border-[#F1E6A0] text-[#F1E6A0]',
+  Mediapipe: 'border-[#9AFFA0] text-[#9AFFA0]',
+  Flask: 'border-[#FF9A6F] text-[#FF9A6F]',
+  CSS: 'border-[#9AFFF6] text-[#9AFFF6]',
+  JavaScript: 'border-[#9AFF9A] text-[#9AFF9A]',
+  HTML: 'border-[#F6A9FF] text-[#F6A9FF]',
+  MachineLearning: 'border-[#FF9A9A] text-[#FF9A9A]',
+  ComputerVision: 'border-[#4DB6AC] text-[#4DB6AC]',
+  Streamlit: 'border-[#9AFFF6] text-[#9AFFF6]',
+  NLP: 'border-[#9AFFF6] text-[#9AFFF6]'
+};
+
+---
+
+<section class="skills-section">
+  <div class="skills-container">
+    {
+      technologies.map(tech => (
+        <span
+          class={`border rounded-md px-3 py-1 text-sm font-normal text-center ${technologyStyles[tech] || ''}`}
+        >
+          {tech}
+        </span>
+      ))
+    }
+  </div>
+</section>
+
+
+

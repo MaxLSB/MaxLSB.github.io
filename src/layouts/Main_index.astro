@@ -1,0 +1,55 @@
+---
+import '../styles/styles.css';
+import Footer from '../components/Footer.astro';
+import NavigationBar from '../components/NavigationBar.astro';
+import { ViewTransitions } from 'astro:transitions';
+
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<html lang="en" class="dark">
+  <head>
+    <body class="overflow-x-hidden">
+      <main class="max-w-5xl mx-auto px-5">
+        <NavigationBar />
+        <slot />
+        <div transition:name="footer">
+          <Footer />
+        </div>
+      </main>
+    </body>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon_m.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Maxence Lasbordes' Portfolio Website."
+    />
+  
+    <title>{title}</title>
+    <ViewTransitions />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0B7H63NEPZ"
+    ></script>
+    <script type="text/javascript">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-0B7H63NEPZ');
+    </script>
+  </head>
+</html>

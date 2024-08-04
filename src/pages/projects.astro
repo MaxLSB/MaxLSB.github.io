@@ -1,0 +1,83 @@
+---
+import Main from '../layouts/Main.astro';
+import Cards from '../components/Cards.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+---
+
+<Main title="Projects">
+
+  <section class="text-left container mx-auto py-8 animate-on-load">
+    <h2 class="text-7xl font-bold text-gray-900 dark:text-gray-300 mb-8">
+      Projects
+    </h2>
+    
+    <p class="px-4">
+      <i>List of my projects from the most recent to the oldest.</i>
+    </p>
+    <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 2rem 0;">
+
+    <div class="flex flex-col animate-on-load">
+      <ProjectCard
+        title="Re-implemented BERT From Scratch"
+        description="Re-implemented a BERT LLM from scratch. Fine-tuned a pre-trained BERT model for emotion classification, and deployed it using Streamlit"
+        technologies={['MachineLearning','NLP', 'Pytorch', 'Python', 'Streamlit']}
+        href="https://github.com/MaxLSB/BERT_LLM_From_Scratch"
+        imgSrc="/images/bert.png"
+        imgAlt="Project"
+      />
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+      <ProjectCard
+        title="Referee Action Recognition"
+        description="Deployed a volleyball referee hand signal detection and classification model on Streamlit, using OpenCV, MediaPipe, Pytorch, LSTMs and a custom made dataset."
+        technologies={['ComputerVision', 'MachineLearning','OpenCV', 'Mediapipe', 'Python', 'Pytorch', 'Streamlit']}
+        href="https://github.com/MaxLSB/Volleyball-Referee-Hand-Signals-Recognition-Model"
+        imgSrc="/images/volleyball.png"
+        imgAlt="Project"
+      />
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+      <ProjectCard
+        title="Video Game Match Prediction"
+        description="Machine Learning prediction model for forecasting the outcomes of League of Legends matches after 10 minutes of gameplay. Deployed using Flask."
+        technologies={['MachineLearning', 'Python', 'Flask', 'HTML', 'CSS', 'JavaScript']}
+        href="https://github.com/MaxLSB/LoL-Match-Prediction-Model-Deployed"
+        imgSrc="/images/league.png"
+        imgAlt="Project"
+      />
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+      
+    
+    </div>
+  </section>
+</Main>
+
+<style>
+  .floating-span {
+    display: inline-block;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('astro:page-load', () => {
+    const spans = document.querySelectorAll('.floating-span');
+    spans.forEach(span => {
+      gsap.to(span, {
+        y: '-5',
+        duration: 1,
+        ease: 'power2.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+    });
+
+    const elements = document.querySelectorAll('.animate-on-load');
+    gsap.from(elements, {
+      opacity: 0,
+      y: 20,
+      duration: 1,
+      ease: 'power2.out',
+      stagger: 0.3,
+    });
+  });
+</script>

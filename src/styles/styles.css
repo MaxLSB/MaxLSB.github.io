@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body::-webkit-scrollbar {
+    width: 4px;
+  }
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--clr-rose);
+    outline: 1px solid var(--clr-rose);
+  }
+
+  /* Font rendering optimizations */
+  body,
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .text-rose-custom {
+    color: var(--clr-rose);
+  }
+  body {
+    padding: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 0.875rem;
+}
+.table thead th {
+    text-align: left;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+}
+.table tbody td {
+    padding: 20px 0;
+    border-bottom: 1px solid #555;
+    
+}
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+.company-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+.company-name{
+    color: #77abff; /* Blue color for links */
+    text-decoration: none;
+}
+.company-name:hover {
+    text-decoration: underline;
+}
+.row {
+    display: flex;
+    align-items: center;
+
+}
+.row img {
+    margin-right: 10px;
+}
+
+
+.gif-container {
+  display: flex; /* Align items horizontally */
+  justify-content: center; /* Center-align the container */
+  gap: 20px; /* Space between each pair of images */
+}
+
+.image-pair {
+  position: relative; /* Positioning context for the absolute positioning of the GIFs */
+  width: 500px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.image-pair img {
+  display: block; /* Removes space below the image */
+  max-width: 100%; /* Ensures the image is responsive */
+  height: auto; /* Maintains aspect ratio */
+  border-radius: 15px; /* Rounded corners (optional) */
+}
+
+.still-image {
+  /* Ensures the still image is visible by default */
+  display: block;
+}
+
+.gif {
+  position: absolute; /* Position GIFs over the still images */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+  opacity: 0; /* Hide GIF initially */
+  pointer-events: none; /* Allow clicks to pass through to the still image */
+  transition: opacity 0.3s; /* Smooth transition for fade effect */
+}
+
+.image-pair:hover .gif {
+  opacity: 1; /* Show GIF on hover */
+}
+
+.image-pair:hover .still-image {
+  opacity: 0; /* Hide still image on hover */
+}
+
+
+.skills-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Adjust space between tags */
+}
+
+.skill-tag {
+    border: 1px solid var(--color); /* Thinner border */
+    border-radius: 8px; /* Slightly rounded corners */
+    padding: 6px 12px; /* Smaller padding */
+    font-size: 14px; /* Smaller text size */
+    font-weight: normal; /* Lighter font weight */
+    text-align: center;
+    color: var(--color); /* Text color same as border */
+    background-color: transparent; /* Transparent background */
+    white-space: nowrap;
+    margin: 0 3px;
+    margin-bottom: 20px;
+}
+}
