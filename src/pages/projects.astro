@@ -19,12 +19,22 @@ import ProjectCard from '../components/ProjectCard.astro';
     <div class="flex flex-col animate-on-load">
       <ProjectCard
         title="Re-implemented BERT From Scratch"
-        description="Re-implemented a BERT LLM from scratch. And fine-tuned a pre-trained BERT model for emotion classification. Deployed it using Streamlit"
+        description="Re-implemented a BERT LLM from scratch. And fine-tuned a pre-trained BERT model for emotion classification. Deployed it using Streamlit."
         technologies={['MachineLearning','NLP', 'Pytorch', 'Python', 'Streamlit']}
         href="https://github.com/MaxLSB/BERT_LLM_From_Scratch"
         imgSrc="/images/bert.png"
         imgAlt="Project"
       />
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+      <div class="flex flex-col animate-on-load">
+        <ProjectCard
+          title="ASR Architectures for the Early Conformer"
+          description="Implemented a Zipformer-like architecture for FBK&apos;s Early Conformer model for Automatic Speech Recognition. Achieved results comparable to state-of-the-art models with increased inference speed."
+          technologies={['MachineLearning','ASR', 'Pytorch', 'Python']}
+          href="https://github.com/MaxLSB/FBK-ASR-EarlyConformer-Models.git"
+          imgSrc="/images/fbk_github.png"
+          imgAlt="Project"
+        />
       <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
       <ProjectCard
         title="Referee Action Recognition"
@@ -44,8 +54,15 @@ import ProjectCard from '../components/ProjectCard.astro';
         imgAlt="Project"
       />
       <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
-      
-    
+      <ProjectCard
+        title="Portfolio Website"
+        description="Personal portfolio website built using an Astro template. Hosted on GitHub Pages."
+        technologies={['Astro', 'HTML', 'CSS', 'JavaScript']}
+        href="https://github.com/MaxLSB/MaxLSB.github.io"
+        imgSrc="/images/portfolio.png"
+        imgAlt="Project"
+      />
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
     </div>
   </section>
 </Main>
