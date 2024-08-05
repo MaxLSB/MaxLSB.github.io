@@ -1,6 +1,6 @@
 # Welcome to my Portfolio GitHub Page !
 
-This portfolio is based on an Astro Template.
+_This portfolio is built using an Astro template._
 
 <img align="left" alt="HTML" width="50px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg" />
 <img align="left" alt="Tailwind" width="50px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" />
