@@ -79,7 +79,8 @@
 
 }
 .row img {
-    margin-right: 10px;
+    margin-right: 5px;
+    padding-right: 5px;
 }
 
 
@@ -149,8 +150,8 @@
     color: var(--color); /* Text color same as border */
     background-color: transparent; /* Transparent background */
     white-space: nowrap;
-    margin: 0 3px;
-    margin-bottom: 20px;
+    margin: -10px 3px;
+    margin-bottom: 10px;
 }
 
 .cv-button {
