@@ -67,7 +67,7 @@
     border-radius: 6px;
 }
 .company-name{
-    color: #77abff; /* Blue color for links */
+    color: #77abff; 
     text-decoration: none;
 }
 .company-name:hover {
@@ -84,22 +84,22 @@
 
 
 .gif-container {
-  display: flex; /* Align items horizontally */
-  justify-content: center; /* Center-align the container */
-  gap: 20px; /* Space between each pair of images */
+  display: flex; 
+  justify-content: center; 
+  gap: 20px; 
 }
 
 .image-pair {
-  position: relative; /* Positioning context for the absolute positioning of the GIFs */
-  width: 500px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
+  position: relative; 
+  width: 500px; 
+  height: auto;
 }
 
 .image-pair img {
   display: block; /* Removes space below the image */
-  max-width: 100%; /* Ensures the image is responsive */
+  max-width: 100%; 
   height: auto; /* Maintains aspect ratio */
-  border-radius: 15px; /* Rounded corners (optional) */
+  border-radius: 15px;
 }
 
 .still-image {
@@ -108,14 +108,14 @@
 }
 
 .gif {
-  position: absolute; /* Position GIFs over the still images */
+  position: absolute; 
   top: 0;
   left: 0;
-  width: 100%; /* Full width of the container */
-  height: 100%; /* Full height of the container */
-  opacity: 0; /* Hide GIF initially */
-  pointer-events: none; /* Allow clicks to pass through to the still image */
-  transition: opacity 0.3s; /* Smooth transition for fade effect */
+  width: 100%; 
+  height: 100%; 
+  opacity: 0; 
+  pointer-events: none; 
+  transition: opacity 0.3s; 
 }
 
 .image-pair:hover .gif {
@@ -136,18 +136,18 @@
 .skills-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px; /* Adjust space between tags */
+    gap: 8px; 
 }
 
 .skill-tag {
-    border: 1px solid var(--color); /* Thinner border */
-    border-radius: 8px; /* Slightly rounded corners */
-    padding: 6px 12px; /* Smaller padding */
-    font-size: 14px; /* Smaller text size */
-    font-weight: normal; /* Lighter font weight */
+    border: 1px solid var(--color); 
+    border-radius: 8px;
+    padding: 6px 12px; 
+    font-size: 14px; 
+    font-weight: normal; 
     text-align: center;
-    color: var(--color); /* Text color same as border */
-    background-color: transparent; /* Transparent background */
+    color: var(--color);
+    background-color: transparent; 
     white-space: nowrap;
     margin: -10px 3px;
     margin-bottom: 10px;
@@ -169,6 +169,13 @@
 
 .cv-button:hover {
   background-color: #d7d7d7;
-  color: #808080; /* Light grey text color */
+  color: #808080; 
 }
+
+.button-container {
+  justify-content: center;
+  display: flex;
+  gap: 3rem; 
+}
+
 }
