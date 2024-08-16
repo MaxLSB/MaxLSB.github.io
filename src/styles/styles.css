@@ -171,11 +171,9 @@
   background-color: #d7d7d7;
   color: #808080; 
 }
-
 .button-container {
   justify-content: center;
   display: flex;
   gap: 3rem; 
 }
-
 }
