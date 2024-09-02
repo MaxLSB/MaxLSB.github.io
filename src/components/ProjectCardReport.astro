@@ -1,8 +1,8 @@
 ---
-const { title, description, technologies, href_github, href_streamlit, imgSrc, imgAlt } = Astro.props;
+const { title, description, technologies, href_github, href_report, imgSrc, imgAlt } = Astro.props;
 import { Image } from 'astro:assets';
 import Button from './BtnProject.astro';
-import ButtonSt from './BtnProjectStreamlit.astro';
+import ButtonSt from './BtnProjectReport.astro';
 import Technologies from './Technologies.astro';
 ---
 
@@ -30,7 +30,7 @@ import Technologies from './Technologies.astro';
     <Technologies technologies={technologies} />
     <div class="button-container">
       <Button text="GitHub" href={href_github} />
-      <ButtonSt text="Streamlit" href={href_streamlit} />
+      <ButtonSt text="Report" href={href_report} />
     </div>
   </div>
 </div>
