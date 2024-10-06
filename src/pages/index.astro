@@ -36,11 +36,10 @@ const blogs = await Astro.glob<{
   </div>
 
   <body>
-    <section class="skills-section">
+    <section class="skills-section-index">
         <div class="skills-container">
             <div class="skill-tag" style="--color: #FF9A9A;">Machine Learning</div>
             <div class="skill-tag" style="--color: #1b63e8;">NLP</div>
-            <div class="skill-tag" style="--color: #4DB6AC;">Computer Vision</div>
             <div class="skill-tag" style="--color: #9A9AFF;">Python</div>
             <div class="skill-tag" style="--color: #9AFF9A;">PyTorch</div>
             <div class="skill-tag" style="--color: #F6A9FF;">Pandas</div>
@@ -49,18 +48,18 @@ const blogs = await Astro.glob<{
         </div>
     </section>
 </body>
-  <div transition:name="cards">
-    <Cards
-      cards={[
-        {
-          title: 'Recent Projects',
-          gradientFrom: '#D3D3D3',
-          gradientTo: '#E0E0E0',
-          to: '/projects',
-        }
-      ]}
-    />
-  </div> 
+<div style="margin-top: 50px;" transition:name="cards">
+  <Cards
+    cards={[
+      {
+        title: 'Recent Projects',
+        gradientFrom: '#D3D3D3',
+        gradientTo: '#E0E0E0',
+        to: '/projects',
+      }
+    ]}
+  />
+</div>
 </Main>
 
 <script>

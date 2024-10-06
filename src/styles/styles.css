@@ -127,10 +127,16 @@
 }
 
 
-.skills-section {
+.skills-section-index {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 10px;
+}
+.skills-section-projects {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 50px;
 }
 
 .skills-container {
