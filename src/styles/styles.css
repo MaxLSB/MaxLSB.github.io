@@ -130,13 +130,13 @@
 .skills-section-index {
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: 30px;
 }
 .skills-section-projects {
   display: flex;
   justify-content: center;
   padding-top: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 35px;
 }
 
 .skills-container {
