@@ -13,7 +13,7 @@ const blogs = await Astro.glob<{
 <Main title="Maxence Lasbordes">
   <div class="flex flex-col items-center mb-6 mt-10 animate">
     <Image
-      class="object-cover rounded-full w-[300px] h-[300px] max-md:w-40 max-md:h-40 mb-2" 
+      class="object-cover rounded-full w-[300px] h-[300px] max-w-full max-h-full mb-2" 
       src="/images/pp_max.jpg"
       alt="Avatar"
       width={300}
@@ -21,16 +21,16 @@ const blogs = await Astro.glob<{
       loading="eager"
     />
 
-    <div class="flex flex-col items-center mt-4 mb-10">
+    <div class="flex flex-col items-center justify-center mt-4 mb-10 text-center">
       <h1 class="text-5xl font-bold text-gray-900 dark:text-gray-300">
-        Maxence Lasbordes
+          Maxence Lasbordes
       </h1>
       <h2 class="text-xl sm:text-1xl text-gray-800 dark:text-gray-300 mt-5">
-        French Machine Learning Student 
-        <span class="font-bold italic"> @ENS @Dauphine @Telecom SudParis</span>
+          French Machine Learning Student 
+          <span class="font-bold italic"> @ENS @Dauphine @Telecom SudParis</span>
       </h2>
-      
-    </div>
+  </div>
+  
   </div>
 
   <div style="margin-top: 50px;" transition:name="cards">
