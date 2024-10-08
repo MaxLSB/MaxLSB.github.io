@@ -11,55 +11,40 @@ const blogs = await Astro.glob<{
 ---
 
 <Main title="Maxence Lasbordes">
-  <div class="flex items-center flex-wrap md:space-x-8 animate">
+  <div class="flex flex-col items-center mb-6 mt-10 animate">
     <Image
-      class="object-cover rounded-full w-[200px] mb-6 h-[200px] max-md:w-40 max-md:h-40"
+      class="object-cover rounded-full w-[300px] h-[300px] max-md:w-40 max-md:h-40 mb-2" 
       src="/images/pp_max.jpg"
       alt="Avatar"
-      width={200}
-      height={200}
+      width={300}
+      height={300}
       loading="eager"
     />
 
-    <div class="flex-1 min-w-[300px] md:ml-4 max-[410px]:mt-4">
-      <h1
-        class="text-4xl font-bold text-gray-900 dark:text-gray-300"
-      >
+    <div class="flex flex-col items-center mt-4 mb-6">
+      <h1 class="text-5xl font-bold text-gray-900 dark:text-gray-300">
         Maxence Lasbordes
       </h1>
-      <h2
-        class="text-xl sm:text-2xl text-gray-700 dark:text-gray-300 mt-2 ml-4"
-      >
-        Machine Learning Student, France
+      <h2 class="text-xl sm:text-1xl text-gray-800 dark:text-gray-300 mt-5">
+        French Machine Learning Student 
+        <span class="font-bold italic"> @ENS @Dauphine @Telecom SudParis</span>
       </h2>
+      
     </div>
   </div>
 
-  <body>
-    <section class="skills-section-index">
-        <div class="skills-container">
-            <div class="skill-tag" style="--color: #FF9A9A;">Machine Learning</div>
-            <div class="skill-tag" style="--color: #1b63e8;">NLP</div>
-            <div class="skill-tag" style="--color: #9A9AFF;">Python</div>
-            <div class="skill-tag" style="--color: #9AFF9A;">PyTorch</div>
-            <div class="skill-tag" style="--color: #F6A9FF;">Pandas</div>
-            <div class="skill-tag" style="--color: #FF9A9A;">Scikit-Learn</div>
-            <div class="skill-tag" style="--color: #9AFFF6;">NumPy</div>
-        </div>
-    </section>
-</body>
-<div style="margin-top: 50px;" transition:name="cards">
-  <Cards
-    cards={[
-      {
-        title: 'Recent Projects',
-        gradientFrom: '#D3D3D3',
-        gradientTo: '#E0E0E0',
-        to: '/projects',
-      }
-    ]}
-  />
-</div>
+  <div style="margin-top: 50px;" transition:name="cards">
+    <Cards
+      cards={[
+        {
+          title: 'Recent Projects',
+          gradientFrom: '#D3D3D3',
+          gradientTo: '#E0E0E0',
+          to: '/projects',
+        }
+      ]}
+    />
+  </div>
 </Main>
 
 <script>
