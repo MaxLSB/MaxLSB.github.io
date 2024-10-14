@@ -20,6 +20,17 @@ import ProjectCardStreamlit from '../components/ProjectCardStreamlit.astro';
 
     <div class="flex flex-col animate-on-load">
       <ProjectCard
+        title="Word2Vec"
+        description="Word2vec and a convolutional classifier using its embeddings to predict the sentiment of movie reviews. Implemented from scratch using Pytorch."
+        technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
+        href="https://github.com/MaxLSB/word2vec"
+        imgSrc="/images/word2vec.png"
+        imgAlt="Project"
+      />
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+
+    <div class="flex flex-col animate-on-load">
+      <ProjectCard
         title="Hourglass: Hierarchical Transformer"
         description="Implemented a character-level Hierarchical Transformer from scratch. Built the entire pre-training, fine-tuning and inference process for English haikus generation."
         technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
