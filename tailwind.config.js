@@ -15,8 +15,8 @@ export default {
     },
     extend: {
       colors: {
-        'background-light': '#FFFFFF',      // Notion light background
-        'background-dark': '#2F3437',       // Notion dark mode background
+        'background-light': '#F7F6F3',      // Notion light background
+        'background-dark': '#FFFFFF',       // Notion dark mode background
         
         // Light mode gray scale (approximations based on Notion’s palette)
         'grey-200-light': '#EBECED',        // Light gray background for elements

@@ -10,18 +10,26 @@ import ProjectCard from '../components/ProjectCard.astro';
       
 
     <section class="text-left container mx-auto animate-on-load">
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1.5rem 0;">
+      
       <div class="flex flex-col animate-on-load mt-0 pt-0">
-
+        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
         <ProjectCard
         title="Mini-PaliGemma 2"
         description="Minimalist implementation of PaliGemma 2 and PaliGemma VLM from scratch. Weights can be loaded for inference, and detections are displayed on input images."
         technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
         href="https://github.com/MaxLSB/mini-paligemma2"
         imgSrc="/images/paligemma.png"
-        imgAlt="Project"
+        imgAlt="Mini-PaliGemma 2"
       />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+
+      <ProjectCard
+        title="Conditional WGAN-GP"
+        description="Conditional WGAN-GP for graph generation based on descriptions for a Kaggle competition."
+        technologies={['MachineLearning', 'Pytorch', 'Python']}
+        href="https://github.com/MaxLSB/cWGAN-GP"
+        imgSrc="/images/cwgan.png"
+        imgAlt="cWGAN-GP"
+      />
 
       <ProjectCard
         title="Word2Vec"
@@ -29,9 +37,8 @@ import ProjectCard from '../components/ProjectCard.astro';
         technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
         href="https://github.com/MaxLSB/word2vec"
         imgSrc="/images/word2vec.png"
-        imgAlt="Project"
+        imgAlt="Word2Vec"
       />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
 
     <div class="flex flex-col animate-on-load">
       <ProjectCard
@@ -40,9 +47,8 @@ import ProjectCard from '../components/ProjectCard.astro';
         technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
         href="https://github.com/MaxLSB/mini-hourglass"
         imgSrc="/images/hourglass.png"
-        imgAlt="Project"
+        imgAlt="Hourglass"
       />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
 
     <div class="flex flex-col animate-on-load">
       <ProjectCard
@@ -51,9 +57,8 @@ import ProjectCard from '../components/ProjectCard.astro';
         technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
         href="https://github.com/MaxLSB/mini-bert"
         imgSrc="/images/bert.png"
-        imgAlt="Project"
+        imgAlt="BERT"
       />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
       <!-- <div class="flex flex-col animate-on-load">
         <ProjectCard 
           title="Splitformer"
@@ -70,9 +75,8 @@ import ProjectCard from '../components/ProjectCard.astro';
         technologies={['ComputerVision', 'MachineLearning','OpenCV', 'Mediapipe', 'Python', 'Pytorch']}
         href="https://github.com/MaxLSB/volleyball-hand-signals-recognition"
         imgSrc="/images/volleyball.png"
-        imgAlt="Project"
+        imgAlt="Referee Action Recognition"
       />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
 
       <ProjectCard
       title="Iterative Conditional Estimator"
@@ -80,26 +84,25 @@ import ProjectCard from '../components/ProjectCard.astro';
       technologies={['Python']}
       href="https://github.com/MaxLSB/iterative-conditional-estimator"
       imgSrc="/images/ice.png"
-      imgAlt="Project"
+      imgAlt="Iterative Conditional Estimator"
     />
 
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
       <ProjectCard
         title="Video Game Match Prediction"
         description="Machine Learning prediction model for forecasting the outcomes of League of Legends matches after 10 minutes of gameplay. Deployed it using Flask."
         technologies={['MachineLearning', 'Python', 'Flask', 'HTML', 'CSS', 'JavaScript']}
         href="https://github.com/MaxLSB/lol-game-prediction"
         imgSrc="/images/league.png"
-        imgAlt="Project"
+        imgAlt="Video Game Match Prediction"
       />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+      
       <ProjectCard
         title="Portfolio Website"
         description="Personal portfolio website built using an Astro template. Hosted on GitHub Pages."
         technologies={['Astro', 'HTML', 'CSS', 'JavaScript']}
         href="https://github.com/MaxLSB/MaxLSB.github.io"
         imgSrc="/images/portfolio.png"
-        imgAlt="Project"
+        imgAlt="Portfolio Website"
       />
       <!-- <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;"> -->
     </div>
