@@ -15,8 +15,8 @@ export default {
     },
     extend: {
       colors: {
-        'background-light': '#F7F6F3',      // Notion light background
-        'background-dark': '#FFFFFF',       // Notion dark mode background
+        'background-light': '#FFFFFF',      // Notion light background
+        'background-dark': '#212121',       // Notion dark mode background
         
         // Light mode gray scale (approximations based on Notion’s palette)
         'grey-200-light': '#EBECED',        // Light gray background for elements
@@ -29,7 +29,7 @@ export default {
         'grey-400-dark': '#979A9B',         // Dark mode secondary text
         'grey-600-dark': '#FFFFFF',         // Dark mode primary text (white)
         'grey-900-dark': '#FAFAFA',          // Near-white accent for high contrast
-        rose: '#FFFFFF',                    // Rose color for dark mode
+        rose: '#FF5733 ',                    // Rose color for dark mode
       },
     },
   },
