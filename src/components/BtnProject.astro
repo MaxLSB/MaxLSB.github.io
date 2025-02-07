@@ -1,5 +1,4 @@
 ---
-// Define props for the button component
 const { text, href } = Astro.props;
 ---
 
@@ -11,19 +10,19 @@ const { text, href } = Astro.props;
 
 <style>
   .btn {
-    @apply inline-block font-bold no-underline text-slate-50 px-4 py-2 rounded-md shadow-lg transition-transform duration-300 ease-in-out;
+    @apply inline-block font-semibold no-underline text-slate-50 px-3 py-1.5 rounded-md shadow-md transition-transform duration-300 ease-in-out;
     background-color: #004080; /* Slightly lighter dark blue color */
     box-shadow:
-      0 10px 20px rgba(0, 64, 128, 0.5), /* Slightly lighter shadow */
-      0 6px 6px rgba(0, 64, 128, 0.5),  /* Slightly lighter shadow */
-      0 0 100px -10px #004080; /* Slightly lighter blue shadow */
+      0 8px 16px rgba(0, 64, 128, 0.5), /* Slightly lighter shadow */
+      0 4px 4px rgba(0, 64, 128, 0.5),  /* Slightly lighter shadow */
+      0 0 80px -10px #004080; /* Slightly lighter blue shadow */
   }
 
   .btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow:
-      0 14px 28px rgba(0, 64, 128, 0.25), /* Slightly lighter shadow on hover */
-      0 10px 10px rgba(0, 64, 128, 0.22), /* Slightly lighter shadow on hover */
-      0 0 120px -10px #004080; /* Slightly lighter blue shadow on hover */
+      0 12px 24px rgba(0, 64, 128, 0.25), /* Slightly lighter shadow on hover */
+      0 8px 8px rgba(0, 64, 128, 0.22),  /* Slightly lighter shadow on hover */
+      0 0 100px -10px #004080; /* Slightly lighter blue shadow on hover */
   }
 </style>

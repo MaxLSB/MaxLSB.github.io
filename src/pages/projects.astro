@@ -1,24 +1,28 @@
 ---
 import Main from '../layouts/Main.astro';
-import Cards from '../components/Cards.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import ProjectCardReport from '../components/ProjectCardReport.astro';
-import ProjectCardStreamlit from '../components/ProjectCardStreamlit.astro';
 ---
 
 <Main title="Projects">
+  <h2 class="text-5xl font-bold text-gray-900 dark:text-gray-300 mb-6">Projects</h2>
+  <p class="px-4 mb-1 text-gray-600 dark:text-gray-400"><i>List of my projects from the most recent to the oldest.</i></p>
 
-  <section class="text-left container mx-auto py-8 animate-on-load">
-    <h2 class="text-7xl font-bold text-gray-900 dark:text-gray-300 mb-8">
-      Projects
-    </h2>
-    
-    <p class="px-4">
-      <i>List of my projects from the most recent to the oldest.</i>
-    </p>
-    <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 2rem 0;">
+      
 
-    <div class="flex flex-col animate-on-load">
+    <section class="text-left container mx-auto animate-on-load">
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1.5rem 0;">
+      <div class="flex flex-col animate-on-load mt-0 pt-0">
+
+        <ProjectCard
+        title="Mini-PaliGemma 2"
+        description="Minimalist implementation of PaliGemma 2 and PaliGemma VLM from scratch. Weights can be loaded for inference, and detections are displayed on input images."
+        technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
+        href="https://github.com/MaxLSB/mini-paligemma2"
+        imgSrc="/images/paligemma.png"
+        imgAlt="Project"
+      />
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+
       <ProjectCard
         title="Word2Vec"
         description="Word2vec and a convolutional classifier using its embeddings to predict the sentiment of movie reviews. Implemented from scratch using Pytorch."
@@ -31,43 +35,40 @@ import ProjectCardStreamlit from '../components/ProjectCardStreamlit.astro';
 
     <div class="flex flex-col animate-on-load">
       <ProjectCard
-        title="Hourglass: Hierarchical Transformer"
-        description="Implemented a character-level Hierarchical Transformer from scratch. Built the entire pre-training, fine-tuning and inference process for English haikus generation."
+        title="Mini-Hourglass"
+        description="Minimalist implementation of Hourglass, a character-level Hierarchical Transformer from scratch. Built the entire pre-training, fine-tuning and inference process for English haikus generation."
         technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
-        href="https://github.com/MaxLSB/hourglass-hierarchical-transformer"
+        href="https://github.com/MaxLSB/mini-hourglass"
         imgSrc="/images/hourglass.png"
         imgAlt="Project"
       />
       <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
 
     <div class="flex flex-col animate-on-load">
-      <ProjectCardStreamlit
-        title="BERT From Scratch \& Emotion classification"
-        description="Implemented BERT from scratch. And fine-tuned a pre-trained BERT model for emotion classification. Deployed it using Streamlit."
-        technologies={['MachineLearning','NLP', 'Pytorch', 'Python', 'Streamlit']}
-        href_github="https://github.com/MaxLSB/BERT-from-scratch"
-        href_streamlit="https://bert-emotion-classification.streamlit.app/"
+      <ProjectCard
+        title="Mini-BERT \& Emotion classification"
+        description="Minimalist implementation of BERT from scratch. And fine-tuned a pre-trained BERT model for emotion classification. Deployed it using Streamlit."
+        technologies={['MachineLearning','NLP', 'Pytorch', 'Python']}
+        href="https://github.com/MaxLSB/mini-bert"
         imgSrc="/images/bert.png"
         imgAlt="Project"
       />
       <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
-      <div class="flex flex-col animate-on-load">
-        <ProjectCardReport 
-          title="Zipformer-like Architectures for ASR (Internship)"
+      <!-- <div class="flex flex-col animate-on-load">
+        <ProjectCard 
+          title="Splitformer"
           description="Developed the early-zipformer and early-conformer-plus architectures for FBK's early-exit transformers models for Automatic Speech Recognition."
           technologies={['MachineLearning','ASR', 'Pytorch', 'Python']}
-          href_github="https://github.com/augustgw/early-exit-transformer"
-          href_report="/images/FBK_Report.pdf"
+          href="https://github.com/augustgw/early-exit-transformer"
           imgSrc="/images/fbk_github.png"
           imgAlt="Project"
         />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
-      <ProjectCardStreamlit
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;"> -->
+      <ProjectCard 
         title="Referee Action Recognition"
         description="Deployed a volleyball referee hand signal detection and classification model with Streamlit, using OpenCV, MediaPipe, Pytorch, LSTMs/CNNs and a custom made dataset."
-        technologies={['ComputerVision', 'MachineLearning','OpenCV', 'Mediapipe', 'Python', 'Pytorch', 'Streamlit']}
-        href_github="https://github.com/MaxLSB/volleyball-hand-signals-recognition"
-        href_streamlit="https://vb-hand-signals-recognition.streamlit.app/"
+        technologies={['ComputerVision', 'MachineLearning','OpenCV', 'Mediapipe', 'Python', 'Pytorch']}
+        href="https://github.com/MaxLSB/volleyball-hand-signals-recognition"
         imgSrc="/images/volleyball.png"
         imgAlt="Project"
       />
@@ -100,7 +101,7 @@ import ProjectCardStreamlit from '../components/ProjectCardStreamlit.astro';
         imgSrc="/images/portfolio.png"
         imgAlt="Project"
       />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+      <!-- <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;"> -->
     </div>
   </section>
 </Main>

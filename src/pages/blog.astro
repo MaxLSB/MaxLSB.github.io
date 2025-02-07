@@ -1,0 +1,62 @@
+---
+import Main from '../layouts/Main.astro';
+
+// Fetch all blog posts from the `src/pages/blogs` directory
+const blogs = await Astro.glob('../pages/blogs/*.md');
+---
+
+
+
+<Main title="Blog">
+    <h2 class="text-5xl font-bold text-gray-900 dark:text-gray-300 mb-6">Blog</h2>
+    <p class="px-4 text-gray-600 dark:text-gray-400"><i>Short articles about my interests or projects.</i></p>
+    <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1.5rem 0;">
+    <p class="px-4 text-sm text-gray-500 dark:text-gray-300 mt-2"><i>Blogs incoming...</i></p>
+    <!--
+    <ul class="mt-6 space-y-5">
+        {blogs.map((blog) => (
+            <a href={blog.url} class="block">
+                <li class="bg-white dark:bg-[#232323] rounded-xl md:rounded-2xl shadow-md p-2 md:p-4 hover:bg-gray-100 dark:hover:bg-[#444] transition-colors duration-200 ease-in-out">
+                    <div class="flex flex-col md:flex-row gap-3 md:gap-5">
+                        <div class="block md:w-1/4">
+                            <img 
+                                src={blog.frontmatter.poster} 
+                                alt={blog.frontmatter.title} 
+                                class="w-full h-auto aspect-video object-cover rounded-lg"
+                            />
+                        </div>
+                    
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start gap-3">
+                                <p class="text-lg md:text-lg font-semibold text-gray-700 dark:text-gray-100 pr-4 max-w-[75%]">
+                                    {blog.frontmatter.title}
+                                </p>
+                                <div class="text-sm text-gray-700 dark:text-gray-200 whitespace-nowrap">
+                                    <div>{blog.frontmatter.date}</div>
+                                    <div class="text-right">{blog.frontmatter.time}</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 mt-2 text-sm md:text-sm line-clamp-3 pr-4">
+                                {blog.frontmatter.subtitle}
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </a>
+        ))}
+    </ul>
+    -->
+</Main>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('astro:page-load', () => {
+    gsap.to('.animate-text', {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power2.out',
+    });
+  });
+</script>

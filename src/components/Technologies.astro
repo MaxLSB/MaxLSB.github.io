@@ -25,11 +25,11 @@ const technologyStyles: Record<string, string> = {
 ---
 
 <section class="skills-section-projects">
-  <div class="skills-container">
+  <div class="skills-container flex flex-wrap">
     {
       technologies.map(tech => (
         <span
-          class={`border rounded-md px-3 py-1 text-sm font-normal text-center ${technologyStyles[tech] || ''}`}
+          class={`border rounded-md px-2 py-1 text-xs font-normal ${technologyStyles[tech] || ''}`}
         >
           {tech}
         </span>
@@ -37,6 +37,8 @@ const technologyStyles: Record<string, string> = {
     }
   </div>
 </section>
+
+
 
 
 

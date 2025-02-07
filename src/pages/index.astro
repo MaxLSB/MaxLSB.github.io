@@ -1,23 +1,22 @@
 ---
 import Main from '../layouts/Main_index.astro';
-import Cards from '../components/Cards.astro';
 import { Image } from 'astro:assets';
 
-const blogs = await Astro.glob<{
-  title: string;
-  poster: string;
-  subtitle: string;
-}>('../pages/blogs/*.md');
+// const blogs = await Astro.glob<{
+//   title: string;
+//   poster: string;
+//   subtitle: string;
+// }>('../pages/blog/*.md');
 ---
 
 <Main title="Maxence Lasbordes">
   <div class="flex flex-col items-center mb-6 mt-10 animate">
     <Image
-      class="object-cover rounded-full w-[300px] h-[300px] max-w-full max-h-full mb-2" 
+      class="object-cover rounded-full w-[250px] h-[250px] max-w-full max-h-full mb-2" 
       src="/images/pp_max.jpg"
       alt="Avatar"
-      width={300}
-      height={300}
+      width={250}
+      height={250}
       loading="eager"
     />
 
@@ -27,25 +26,10 @@ const blogs = await Astro.glob<{
       </h1>
       <h2 class="text-xl sm:text-1xl text-gray-800 dark:text-gray-300 mt-5">
           French Machine Learning Student 
-          <span class="font-bold italic"> @ENS @Dauphine @Telecom SudParis</span>
+          <span class="font-bold italic"> @PSL @Telecom SudParis</span>
       </h2>
   </div>
   
-  </div>
-
-  <div style="margin-top: 50px;" transition:name="cards">
-    <Cards
-      cards={[
-        {
-          title: 'Recent Projects',
-          gradientFrom: '#D3D3D3',
-          gradientTo: '#E0E0E0',
-          to: '/projects',
-        }
-      ]}
-    />
-
-    <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 4rem 0 1rem 0;">
   </div>
 
 </Main>

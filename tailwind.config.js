@@ -15,17 +15,21 @@ export default {
     },
     extend: {
       colors: {
-        'background-light': '#f8fafc',
-        'background-dark': '#18181b',
-        'grey-200-light': '#222222',
-        'grey-200-dark': '#eaeaea',
-        'grey-400-light': '#444444',
-        'grey-400-dark': '#acacac',
-        'grey-600-light': '#333333',
-        'grey-600-dark': '#ffffff',
-        'grey-900-light': '#111111',
-        'grey-900-dark': '#fafafa',
-        rose: '#e11d48',
+        'background-light': '#FFFFFF',      // Notion light background
+        'background-dark': '#2F3437',       // Notion dark mode background
+        
+        // Light mode gray scale (approximations based on Notion’s palette)
+        'grey-200-light': '#EBECED',        // Light gray background for elements
+        'grey-400-light': '#9B9A97',        // Secondary text color
+        'grey-600-light': '#37352F',        // Primary text color
+        'grey-900-light': '#111111',        // Extra-dark accent (optional)
+        
+        // Dark mode gray scale (approximations)
+        'grey-200-dark': '#454B4E',         // Dark mode secondary background
+        'grey-400-dark': '#979A9B',         // Dark mode secondary text
+        'grey-600-dark': '#FFFFFF',         // Dark mode primary text (white)
+        'grey-900-dark': '#FAFAFA',          // Near-white accent for high contrast
+        rose: '#FFFFFF',                    // Rose color for dark mode
       },
     },
   },
@@ -81,7 +85,7 @@ export default {
     function ({ addComponents, theme }) {
       addComponents({
         '.active-link': {
-          backgroundColor: theme('colors.grey-600-light'),
+          backgroundColor: theme('colors.background-dark'),
           color: theme('colors.background-light'),
         },
       });

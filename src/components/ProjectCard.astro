@@ -1,32 +1,30 @@
 ---
 const { title, description, technologies, href, imgSrc, imgAlt } = Astro.props;
 import { Image } from 'astro:assets';
-import Button from './BtnProject.astro';
 import Technologies from './Technologies.astro';
 ---
 
-<div class="flex flex-col sm:flex-row items-center mb-4 mt-3">
-  <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-8">
+<a href={href} target="_blank" rel="noopener noreferrer" class="block">
+  <div class="flex flex-col sm:flex-row items-center gap-3 mb-2 mt-1 p-4 bg-white dark:bg-[#232323] rounded-xl shadow-sm hover:bg-gray-100 dark:hover:bg-[#444] transition-colors duration-300 cursor-pointer">
     <Image
       src={imgSrc}
       alt={imgAlt}
-      class="w-[400px] h-[250px] object-cover rounded-md transition-transform duration-300 ease-in-out transform hover:scale-105"
-      width={400}
-      height={250}
+      class="w-[260px] h-[160px] sm:w-[280px] sm:h-[180px] object-cover rounded-md"
+      width={280}
+      height={180}
     />
+    <div class="flex-1 max-w-[500px] px-4">
+      <h3 class="text-base lg:text-lg font-semibold mb-1 text-gray-800 dark:text-gray-300 text-center sm:text-left">
+        {title}
+      </h3>
+      <p class="text-sm text-gray-700 dark:text-gray-400 text-left mb-4">
+        {description}
+      </p>
+      <Technologies technologies={technologies} />
+    </div>
   </div>
-  <div class="flex-1">
-    <h3
-      class="text-base lg:text-xl xl:text-2xl mb-4 text-gray-800 dark:text-gray-300 text-center"
-    >
-      {title}
-    </h3>
-    <p
-      class="text-xs sm:text-sm lg:text-base mb-4 text-gray-700 dark:text-gray-400 text-left px-4"
-    >
-      {description}
-    </p>
-    <Technologies technologies={technologies} />
-    <Button text="GitHub" href={href} />
-  </div>
-</div>
+</a>
+
+
+
+
