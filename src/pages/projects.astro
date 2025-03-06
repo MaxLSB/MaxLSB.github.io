@@ -7,12 +7,20 @@ import ProjectCard from '../components/ProjectCard.astro';
   <h2 class="text-5xl font-bold text-gray-900 dark:text-gray-300 mb-6">Projects</h2>
   <p class="px-4 mb-1 text-gray-600 dark:text-gray-400"><i>List of my projects from the most recent to the oldest.</i></p>
 
-      
-
     <section class="text-left container mx-auto animate-on-load">
       
       <div class="flex flex-col animate-on-load mt-0 pt-0">
         <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+
+        <ProjectCard
+        title="Flash-Attn2"
+        description="Built FlashAttention-2 in Triton, including forward and backward Pass for self-attention. Supports sliding window, causal and global attention."
+        technologies={['MachineLearning', 'Pytorch', 'Python']}
+        href="https://github.com/MaxLSB/flash-attn2"
+        imgSrc="/images/flashAttn2.png"
+        imgAlt="FlashAttention-2"
+      />
+
         <ProjectCard
         title="Mini-PaliGemma 2"
         description="Minimalist implementation of PaliGemma 2 and PaliGemma VLM from scratch. Weights can be loaded for inference, and detections are displayed on input images."
