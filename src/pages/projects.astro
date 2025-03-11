@@ -15,7 +15,7 @@ import ProjectCard from '../components/ProjectCard.astro';
         <ProjectCard
         title="FlashAttention-2"
         description="Built FlashAttention-2 in Triton, including forward and backward pass for self-attention. Supports sliding window, causal and global attention."
-        technologies={['MachineLearning', 'Pytorch', 'Python']}
+        technologies={['Triton', 'MachineLearning', 'Pytorch', 'Python']}
         href="https://github.com/MaxLSB/flash-attn2"
         imgSrc="/images/flashAttn2.png"
         imgAlt="FlashAttention-2"
@@ -67,23 +67,14 @@ import ProjectCard from '../components/ProjectCard.astro';
         imgSrc="/images/bert.png"
         imgAlt="BERT"
       />
-      <!-- <div class="flex flex-col animate-on-load">
-        <ProjectCard 
-          title="Splitformer"
-          description="Developed the early-zipformer and early-conformer-plus architectures for FBK's early-exit transformers models for Automatic Speech Recognition."
-          technologies={['MachineLearning','ASR', 'Pytorch', 'Python']}
-          href="https://github.com/augustgw/early-exit-transformer"
-          imgSrc="/images/fbk_github.png"
-          imgAlt="Project"
-        />
-      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;"> -->
+
       <ProjectCard 
-        title="Referee Action Recognition"
+        title="VolleyJudge"
         description="Deployed a volleyball referee hand signal detection and classification model with Streamlit, using OpenCV, MediaPipe, Pytorch, LSTMs/CNNs and a custom made dataset."
         technologies={['ComputerVision', 'MachineLearning','OpenCV', 'Mediapipe', 'Python', 'Pytorch']}
-        href="https://github.com/MaxLSB/volleyball-hand-signals-recognition"
-        imgSrc="/images/volleyball.png"
-        imgAlt="Referee Action Recognition"
+        href="https://github.com/MaxLSB/volley-judge"
+        imgSrc="/images/VolleyJudge.png"
+        imgAlt="VolleyJudge"
       />
 
       <ProjectCard
