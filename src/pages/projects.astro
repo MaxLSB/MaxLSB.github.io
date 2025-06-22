@@ -13,6 +13,15 @@ import ProjectCard from '../components/ProjectCard.astro';
         <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
 
         <ProjectCard
+        title="LeCarnet"
+        description="LeCarnet is a synthetic dataset of 2M+ original French children’s stories using simple vocabulary. Trained and released LeCarnet-3M/8M/21M, a series of SLMs capable of generating fluent French stories despite their size."
+        technologies={['MachineLearning', 'Pytorch', 'Python']}
+        href="https://github.com/MaxLSB/LeCarnet"
+        imgSrc="/images/lecarnet.png"
+        imgAlt="LeCarnet"
+      />
+
+        <ProjectCard
         title="FlashAttention-2"
         description="Built FlashAttention-2 in Triton, including forward and backward pass for self-attention. Supports sliding window, causal and global attention."
         technologies={['Triton', 'MachineLearning', 'Pytorch', 'Python']}
