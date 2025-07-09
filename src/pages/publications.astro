@@ -1,0 +1,45 @@
+---
+import Main from '../layouts/Main.astro';
+---
+
+<Main title="Publications">
+    <h2 class="text-5xl font-bold text-gray-900 dark:text-gray-300 mb-6">Publications</h2>
+    <p class="px-4 mb-1 text-gray-600 dark:text-gray-400"><i>List of my research publications.</i></p>
+
+    <ul class="mt-4 space-y-5">
+      <div class="relative group border border-gray-200 dark:border-gray-700 rounded-2xl p-6 transition duration-300 bg-white dark:bg-[#202020] hover:shadow-xl hover:border-blue-400">
+        <h3 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-2 leading-snug">
+          <a href="https://arxiv.org/abs/2506.18035" target="_blank" class="hover:underline">
+            Splitformer: An improved early-exit architecture for automatic speech recognition on edge devices
+          </a>
+        </h3>
+        <p class="text-sm text-gray-700 dark:text-gray-300 mb-1">
+          <span class="font-medium">M Lasbordes, D Falavigna and A Brutti</span>
+        </p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+          <span class="italic">Accepted at EUSIPCO 2025</span> — June 2025
+        </p>
+        <div class="flex flex-wrap items-center gap-4 mt-4 text-sm">
+          <a href="https://arxiv.org/pdf/2506.18035" target="_blank" class="text-blue-500 hover:underline">PDF</a>
+          <a href="https://arxiv.org/abs/2506.18035" target="_blank" class="text-blue-500 hover:underline">arXiv</a>
+          <a href="https://github.com/augustgw/early-exit-transformer" target="_blank" class="text-blue-500 hover:underline">GitHub</a>
+          <a href="https://huggingface.co/MaxLSB/Splitformer" target="_blank" class="text-blue-500 hover:underline">Hugging Face</a>
+          <span class="text-xs text-gray-400 dark:text-gray-500 hidden sm:inline">Edge Devices · Early-Exit · Speech Recognition</span>
+        </div>
+      </div>
+    </div>
+</Main>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('astro:page-load', () => {
+    gsap.to('.animate-text', {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power2.out',
+    });
+  });
+</script>
+

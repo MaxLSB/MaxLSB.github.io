@@ -9,8 +9,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 
     <section class="text-left container mx-auto animate-on-load">
       
-      <div class="flex flex-col animate-on-load mt-0 pt-0">
-        <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1rem 0;">
+      <div class="flex flex-col animate-on-load mt-3 pt-0">
 
         <ProjectCard
         title="LeCarnet"
@@ -127,24 +126,11 @@ import ProjectCard from '../components/ProjectCard.astro';
   import { gsap } from 'gsap';
 
   document.addEventListener('astro:page-load', () => {
-    const spans = document.querySelectorAll('.floating-span');
-    spans.forEach(span => {
-      gsap.to(span, {
-        y: '-5',
-        duration: 1,
-        ease: 'power2.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
-    });
-
-    const elements = document.querySelectorAll('.animate-on-load');
-    gsap.from(elements, {
-      opacity: 0,
-      y: 20,
+    gsap.to('.animate-text', {
+      opacity: 1,
+      y: 0,
       duration: 1,
       ease: 'power2.out',
-      stagger: 0.3,
     });
   });
 </script>

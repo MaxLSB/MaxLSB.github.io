@@ -1,41 +1,36 @@
 ---
 import Main from '../layouts/Main.astro';
-
-// Fetch all blog posts from the `src/pages/blogs` directory
-const blogs = await Astro.glob('../pages/blogs/*.md');
 ---
 
-
-
 <Main title="Blog">
-    <h2 class="text-5xl font-bold text-gray-900 dark:text-gray-300 mb-6">Blog</h2>
-    <p class="px-4 text-gray-600 dark:text-gray-400">
-        <i>Short articles about my research, interests or projects (<a href="https://maxlsb.bearblog.dev/" target="_blank" class="text-blue-500 hover:underline">Visit my blog</a>).</i>
+  <section class="px-4">
+    <h2 class="text-5xl font-bold text-gray-900 dark:text-gray-300 mb-6">
+      Blog
+    </h2>
+    <p class="px-4 mb-1 text-gray-600 dark:text-gray-400"><i>
+        Short articles about my research, interests, or projects.
+        (<a href="https://maxlsb.bearblog.dev/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Visit my blog</a>)
+      </i>
     </p>
-    <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 1.5rem 0;">
-    
-    <ul class="mt-6 space-y-5">
-        <a href="https://maxlsb.bearblog.dev/splitformer/">
-            <li class="bg-white dark:bg-[#303030] rounded-xl md:rounded-2xl shadow-md p-3 md:p-4 hover:bg-gray-100 dark:hover:bg-[#444] transition-colors duration-200 ease-in-out">
-                <div class="flex flex-col md:flex-row gap-3 md:gap-5">
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-center gap-3">
-                            <p class="text-lg font-semibold text-gray-900 dark:text-white pr-4 max-w-[75%]">
-                                Splitformer: An improved early-exit architecture for ASR on edge devices
-                            </p>
-                            <div class="text-sm text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                                <div>27 Mar, 2025</div>
-                                <div class="text-right">5 min</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </a>
-    </ul>
-</Main>
 
-  
+    <ul class="mt-4 space-y-5">
+      <li>
+        <a href="https://maxlsb.bearblog.dev/splitformer/" target="_blank" rel="noopener noreferrer"
+           class="block bg-white dark:bg-[#2e2e2e] rounded-2xl shadow-md p-4 hover:bg-gray-100 dark:hover:bg-[#444] transition-colors duration-200">
+          <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <p class="text-lg font-semibold text-gray-900 dark:text-white">
+              Splitformer: An improved early-exit architecture for ASR on edge devices
+            </p>
+            <div class="text-sm text-gray-600 dark:text-gray-300 text-right md:text-left md:whitespace-nowrap">
+              <div>27 Mar, 2025</div>
+              <div>5 min read</div>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+</Main>
 
 <script>
   import { gsap } from 'gsap';
