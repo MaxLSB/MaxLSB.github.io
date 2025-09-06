@@ -10,20 +10,27 @@ const publications = await getCollection("publications");
 const sortedPublications = publications.sort((a, b) => b.data.year - a.data.year);
 ---
 
-<BaseLayout title="Publications" description="Research papers, articles, and academic publications">
+<BaseLayout title="Publications" description="Research papers and academic publications">
   <Container>
-    <BaseHero title="Publications" description="Research papers, articles, and academic publications" />
+    <BaseHero title="Publications" description="Research papers and academic publications" />
     <ContentList>
       {
-        sortedPublications.map((publication) => (
-          <ArticleCard
-            title={publication.data.title}
-            description={`${publication.data.authors.join(", ")} - ${publication.data.venue} (${publication.data.year})`}
-            url={publication.data.url || "#"}
-            date={new Date(publication.data.year, 0, 1)}
-            tags={publication.data.tags}
-          />
-        ))
+        sortedPublications.map((publication) => {
+          const additionalLinks = [];
+          if (publication.data.pdf && publication.data.pdf !== publication.data.url) {
+            additionalLinks.push({ label: "PDF", url: publication.data.pdf });
+          }
+          
+          return (
+            <ArticleCard
+              title={publication.data.title}
+              description={`${publication.data.authors.join(", ")} - ${publication.data.venue} (${publication.data.year})`}
+              url={`/publications/${publication.id}/`}
+              date={new Date(publication.data.year, 0, 1)}
+              additionalLinks={additionalLinks}
+            />
+          );
+        })
       }
     </ContentList>
   </Container>

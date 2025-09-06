@@ -1,30 +1,26 @@
 {
   "home": {
-    "name": "ByteKai",
-    "title": "Software Engineer & Curious Tinkerer",
-    "introduction": "I’m constantly learning and evolving. I love diving into new ideas and finding creative ways to solve problems.",
-    "sections": {
-      "blog": {
-        "title": "Writing",
-        "viewAllText": "View all posts"
-      },
-      "projects": {
-        "title": "Projects",
-        "viewAllText": "View all projects"
-      },
-      "experience": {
-        "title": "Experience",
-        "viewAllText": "View full résumé"
-      }
-    },
+    "name": "Maxence Lasbordes",
     "socialLinks": [
       {
-        "platform": "GitHub",
-        "url": "https://github.com/bytekai"
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/in/maxence-lasbordes/"
       },
       {
-        "platform": "Twitter",
-        "url": "https://x.com/byteekai"
+        "platform": "GitHub",
+        "url": "https://github.com/MaxLSB"
+      },
+      {
+        "platform": "Hugging Face",
+        "url": "https://huggingface.co/MaxLSB"
+      },
+      {
+        "platform": "Scholar",
+        "url": "https://scholar.google.com/citations?user=MmqCJi4AAAAJ&hl=fr"
+      },
+      {
+        "platform": "X",
+        "url": "https://x.com/maxencelsb"
       }
     ]
   }

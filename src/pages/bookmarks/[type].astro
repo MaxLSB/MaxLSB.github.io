@@ -1,4 +1,14 @@
 ---
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  return [
+    { params: { type: "article" } },
+    { params: { type: "book" } },
+    { params: { type: "video" } },
+  ];
+}) satisfies GetStaticPaths;
+
 // Redirect to projects
 return Astro.redirect('/projects');
 ---

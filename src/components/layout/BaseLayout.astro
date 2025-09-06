@@ -57,12 +57,12 @@ const { title, description, image = "/default-og-image.jpg", canonicalURL = Astr
     <meta name="generator" content={Astro.generator} />
     <ClientRouter />
     <script is:inline>
-      // Always use dark theme
-      document.documentElement.setAttribute("data-theme", "dark");
+      // Always use light theme
+      document.documentElement.setAttribute("data-theme", "light");
 
       // Handle theme persistence during view transitions
       document.addEventListener("astro:before-swap", (ev) => {
-        ev.newDocument.documentElement.setAttribute("data-theme", "dark");
+        ev.newDocument.documentElement.setAttribute("data-theme", "light");
       });
 
       // Add initial-load class

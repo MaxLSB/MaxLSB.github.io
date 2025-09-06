@@ -11,6 +11,7 @@ const blog = defineCollection({
         description: z.string(),
         publishedAt: z.coerce.date(),
         draft: z.boolean().optional().default(false),
+        externalUrl: z.string().url().optional(),
     })
 });
 
@@ -47,8 +48,8 @@ const site = defineCollection({
     loader: file("./src/content/site/config.json"),
     schema: z.object({
         name: z.string(),
-        title: z.string(),
-        introduction: z.string(),
+        title: z.string().optional(),
+        introduction: z.string().optional(),
         sections: z.object({
             blog: z.object({
                 title: z.string(),
@@ -62,7 +63,7 @@ const site = defineCollection({
                 title: z.string(),
                 viewAllText: z.string(),
             }),
-        }),
+        }).optional(),
         socialLinks: z.array(z.object({
             platform: z.string(),
             url: z.string().url(),
@@ -114,6 +115,8 @@ const publications = defineCollection({
         pdf: z.string().url().optional(),
         abstract: z.string().optional(),
         tags: z.array(z.string()).optional(),
+        huggingface: z.string().url().optional(),
+        github: z.string().url().optional(),
     })
 });
 

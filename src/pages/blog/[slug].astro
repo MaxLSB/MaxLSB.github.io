@@ -12,6 +12,12 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { post } = Astro.props;
+
+// If the post has an external URL, redirect to it
+if (post.data.externalUrl) {
+  return Astro.redirect(post.data.externalUrl);
+}
+
 const { Content } = await render(post);
 
 const formatDate = (date: Date) => {

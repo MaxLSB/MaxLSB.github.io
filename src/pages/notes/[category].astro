@@ -1,4 +1,14 @@
 ---
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  return [
+    { params: { category: "tech" } },
+    { params: { category: "ai" } },
+    { params: { category: "web" } },
+  ];
+}) satisfies GetStaticPaths;
+
 // Redirect to blog
 return Astro.redirect('/blog');
 ---

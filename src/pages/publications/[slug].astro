@@ -1,0 +1,242 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import Container from "../../components/ui/Container.astro";
+
+export async function getStaticPaths() {
+  const publications = await getCollection("publications");
+  return publications.map((publication) => ({
+    params: { slug: publication.id },
+    props: { publication },
+  }));
+}
+
+const { publication } = Astro.props;
+---
+
+<BaseLayout title={publication.data.title} description={publication.data.abstract || ""}>
+  <Container>
+    <article class="publication-detail">
+      <header class="publication-header">
+        <h1>{publication.data.title}</h1>
+        <div class="publication-meta">
+          <p class="authors">{publication.data.authors.join(", ")}</p>
+          <p class="venue">{publication.data.venue} ({publication.data.year})</p>
+        </div>
+        
+        {publication.data.abstract && (
+          <div class="abstract">
+            <h2>Abstract</h2>
+            <p>{publication.data.abstract}</p>
+          </div>
+        )}
+
+        <div class="publication-links">
+          {publication.data.url && (
+            <a href={publication.data.url} target="_blank" rel="noopener noreferrer" class="link-button">
+              View Paper
+            </a>
+          )}
+          {publication.data.huggingface && (
+            <a href={publication.data.huggingface} target="_blank" rel="noopener noreferrer" class="link-button">
+              Model
+            </a>
+          )}
+          {publication.data.github && (
+            <a href={publication.data.github} target="_blank" rel="noopener noreferrer" class="link-button">
+              GitHub
+            </a>
+          )}
+        </div>
+
+        {publication.data.tags && (
+          <div class="tags">
+            {publication.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div class="publication-content">
+        <div set:html={publication.body} />
+      </div>
+    </article>
+  </Container>
+</BaseLayout>
+
+<style>
+  .publication-detail {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .publication-header {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .publication-header h1 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .publication-meta {
+    margin-bottom: 1.5rem;
+  }
+
+  .authors {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+
+  .venue {
+    font-size: var(--text-base);
+    color: var(--muted-text-color);
+    margin: 0;
+  }
+
+  .abstract {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--link-color);
+  }
+
+  .abstract h2 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .abstract p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--text-color);
+  }
+
+  .publication-links {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .link-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--link-color);
+    border: 1px solid var(--link-color);
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+  }
+
+  .link-button:hover {
+    background-color: var(--link-color);
+    color: var(--bg-color);
+  }
+
+  .link-button.primary {
+    background-color: var(--link-color);
+    color: var(--bg-color);
+  }
+
+  .link-button.primary:hover {
+    background-color: transparent;
+    color: var(--link-color);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: var(--text-xs);
+    padding: 0.25rem 0.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--muted-text-color);
+    border-radius: 0.25rem;
+  }
+
+  .publication-content {
+    line-height: 1.7;
+  }
+
+  .publication-content h2 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin: 2rem 0 1rem 0;
+    color: var(--text-color);
+  }
+
+  .publication-content h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem 0;
+    color: var(--text-color);
+  }
+
+  .publication-content p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .publication-content ul, .publication-content ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .publication-content li {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+
+  .publication-content a {
+    color: var(--link-color);
+    text-decoration: none;
+  }
+
+  .publication-content a:hover {
+    text-decoration: underline;
+  }
+
+  .publication-content pre {
+    background-color: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .publication-content code {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  .publication-content pre code {
+    background: none;
+    padding: 0;
+  }
+
+  @media (max-width: 768px) {
+    .publication-links {
+      flex-direction: column;
+    }
+
+    .link-button {
+      text-align: center;
+    }
+  }
+</style>
