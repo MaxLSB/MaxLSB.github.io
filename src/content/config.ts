@@ -100,6 +100,23 @@ const bookmarks = defineCollection({
     })
 });
 
+const publications = defineCollection({
+    loader: glob({
+        pattern: "**/*.md",
+        base: "./src/content/publications"
+    }),
+    schema: z.object({
+        title: z.string(),
+        authors: z.array(z.string()),
+        venue: z.string(),
+        year: z.number(),
+        url: z.string().url().optional(),
+        pdf: z.string().url().optional(),
+        abstract: z.string().optional(),
+        tags: z.array(z.string()).optional(),
+    })
+});
+
 export const collections = {
     blog,
     experience,
@@ -107,4 +124,5 @@ export const collections = {
     site,
     notes,
     bookmarks,
+    publications,
 }; 

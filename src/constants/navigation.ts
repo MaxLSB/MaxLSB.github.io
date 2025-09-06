@@ -6,15 +6,19 @@ export const NAVIGATION: Navigation = [
         path: "/",
     },
     {
+        name: "Publications",
+        path: "/publications",
+    },
+    {
+        name: "Projects",
+        path: "/projects",
+    },
+    {
         name: "Blog",
         path: "/blog",
     },
     {
-        name: "Notes",
-        path: "/notes",
-    },
-    {
-        name: "Bookmarks",
-        path: "/bookmarks",
+        name: "About me",
+        path: "/about",
     },
 ]; 

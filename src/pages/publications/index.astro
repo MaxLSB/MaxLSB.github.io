@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import BaseHero from "../../components/shared/BaseHero.astro";
+import ArticleCard from "../../components/ui/ArticleCard.astro";
+import Container from "../../components/ui/Container.astro";
+import ContentList from "../../components/shared/ContentList.astro";
+
+const publications = await getCollection("publications");
+const sortedPublications = publications.sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Publications" description="Research papers, articles, and academic publications">
+  <Container>
+    <BaseHero title="Publications" description="Research papers, articles, and academic publications" />
+    <ContentList>
+      {
+        sortedPublications.map((publication) => (
+          <ArticleCard
+            title={publication.data.title}
+            description={`${publication.data.authors.join(", ")} - ${publication.data.venue} (${publication.data.year})`}
+            url={publication.data.url || "#"}
+            date={new Date(publication.data.year, 0, 1)}
+            tags={publication.data.tags}
+          />
+        ))
+      }
+    </ContentList>
+  </Container>
+</BaseLayout>
