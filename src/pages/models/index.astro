@@ -5,6 +5,7 @@ import ModelCard from "../../components/ui/ModelCard.astro";
 import Container from "../../components/ui/Container.astro";
 import ModelsList from "../../components/shared/ModelsList.astro";
 import { fetchAllModelStats } from "../../utils/modelStats";
+import { formatModelSize } from "../../utils/modelSize";
 
 // Model data - you can move this to a separate file if needed
 const models = [
@@ -12,49 +13,49 @@ const models = [
     name: "kurakurai/Luth-LFM2-1.2B",
     description: "French fine-tuned version of LFM2-1.2B in collaboration with Liquid AI, trained on the Luth-SFT dataset. Improved French capabilities in instruction following, math, and general knowledge.",
     url: "https://huggingface.co/kurakurai/Luth-LFM2-1.2B",
-    modelType: "Text Generation • 1.2B"
+    modelType: `Text Generation • ${formatModelSize("1.2B")}`
   },
   {
     name: "kurakurai/Luth-LFM2-700M",
     description: "French fine-tuned version of LFM2-700M in collaboration with Liquid AI, trained on the Luth-SFT dataset. Improved French capabilities while maintaining stable English performance.",
     url: "https://huggingface.co/kurakurai/Luth-LFM2-700M",
-    modelType: "Text Generation • 700M"
+    modelType: `Text Generation • ${formatModelSize("700M")}`
   },
   {
     name: "kurakurai/Luth-LFM2-350M",
     description: "French fine-tuned version of LFM2-350M in collaboration with Liquid AI, trained on the Luth-SFT dataset. Enhanced French capabilities with stable English performance.",
     url: "https://huggingface.co/kurakurai/Luth-LFM2-350M",
-    modelType: "Text Generation • 350M"
+    modelType: `Text Generation • ${formatModelSize("350M")}`
   },
   {
     name: "kurakurai/Luth-1.7B-Instruct",
     description: "A 1.7B parameter instruction-tuned model for French language tasks, providing high-quality responses in French.",
     url: "https://huggingface.co/kurakurai/Luth-1.7B-Instruct",
-    modelType: "Text Generation • 1.7B"
+    modelType: `Text Generation • ${formatModelSize("1.7B")}`
   },
   {
     name: "kurakurai/Luth-0.6B-Instruct",
     description: "A compact 0.6B parameter instruction-tuned model optimized for French language tasks with efficient performance.",
     url: "https://huggingface.co/kurakurai/Luth-0.6B-Instruct",
-    modelType: "Text Generation • 600M"
+    modelType: `Text Generation • ${formatModelSize("0.6B")}`
   },
   {
     name: "MaxLSB/LeCarnet-21M",
     description: "A 21M parameter model trained on French text, designed for efficient French language understanding and generation.",
     url: "https://huggingface.co/MaxLSB/LeCarnet-21M",
-    modelType: "Text Generation • 21M"
+    modelType: `Text Generation • ${formatModelSize("21M")}`
   },
   {
     name: "MaxLSB/LeCarnet-8M",
     description: "A lightweight 8M parameter model for French language tasks, optimized for speed and efficiency.",
     url: "https://huggingface.co/MaxLSB/LeCarnet-8M",
-    modelType: "Text Generation • 8M"
+    modelType: `Text Generation • ${formatModelSize("8M")}`
   },
   {
     name: "MaxLSB/LeCarnet-3M",
     description: "An ultra-lightweight 3M parameter model for basic French language processing tasks.",
     url: "https://huggingface.co/MaxLSB/LeCarnet-3M",
-    modelType: "Text Generation • 3M"
+    modelType: `Text Generation • ${formatModelSize("3M")}`
   },
   {
     name: "MaxLSB/Splitformer",
@@ -78,7 +79,7 @@ const models = [
     name: "MaxLSB/LeCarnet",
     description: "Synthetic French dataset for training small language models. Contains 2.03M rows of French text data, designed for efficient French language understanding and generation.",
     url: "https://huggingface.co/datasets/MaxLSB/LeCarnet",
-    modelType: "Dataset • 2.03M"
+    modelType: `Dataset • ${formatModelSize("2.03M", true)}`
   }
 ];
 

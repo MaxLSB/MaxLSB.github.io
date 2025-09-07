@@ -130,11 +130,12 @@ import SocialIcon from "../SocialIcon.astro";
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: var(--text-muted);
+    color: var(--text-color);
     transition: opacity 0.2s ease;
     padding: 0.25rem;
     width: 26px;
     height: 26px;
+    opacity: 0.9;
   }
 
   .logo-link.hf-link {
@@ -143,7 +144,8 @@ import SocialIcon from "../SocialIcon.astro";
   }
 
   .logo-link:hover {
-    opacity: 0.7;
+    opacity: 1;
+    color: var(--link-color);
   }
 
   .tags {

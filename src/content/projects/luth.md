@@ -3,7 +3,7 @@ title: "Luth"
 description: "Luth is a state-of-the-art series of fine-tuned LLMs for French, delivering improved French instruction-following, math, and general knowledge capabilities."
 url: "https://github.com/kurakurai/Luth"
 featured: false
-techs: ["Large Language Models", "French NLP", "Supervised Fine-tuning", "Axolotl", "LightEval"]
+techs: ["Large Language Models", "Transformers", "French"]
 additionalLinks:
   - label: "GitHub"
     url: "https://github.com/kurakurai/Luth"

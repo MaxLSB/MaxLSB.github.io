@@ -15,6 +15,9 @@ const site = siteConfig.data;
 <BaseLayout title={site.name} description="Maxence Lasbordes - AI/ML Researcher">
   <Container>
     <section class="hero">
+      <div class="profile-picture">
+        <img src="/images/pp_max.jpg" alt="Maxence Lasbordes" />
+      </div>
       <h1>{site.name}</h1>
       <p class="subtitle">Research Intern @LightOn</p>
       {
@@ -43,23 +46,39 @@ const site = siteConfig.data;
   }
 
   .hero {
-    padding: 4rem 0;
+    padding: 2rem 0;
     text-align: center;
     overflow-x: hidden;
   }
 
+  .profile-picture {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-picture img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
   h1 {
     font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
     color: var(--text-color);
+    letter-spacing: -0.02em;
   }
 
   .subtitle {
-    font-size: 1.125rem;
-    font-weight: 400;
-    margin-bottom: 2rem;
-    color: var(--text-muted);
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    letter-spacing: -0.01em;
   }
 
   .social-links {
@@ -123,7 +142,16 @@ const site = siteConfig.data;
     }
 
     .hero {
-      padding: 3rem 0;
+      padding: 1.5rem 0;
+    }
+
+    .profile-picture {
+      margin-bottom: 1rem;
+    }
+
+    .profile-picture img {
+      width: 180px;
+      height: 180px;
     }
 
     h1 {
@@ -131,7 +159,7 @@ const site = siteConfig.data;
     }
 
     .subtitle {
-      font-size: 0.95rem;
+      font-size: 1.1rem;
     }
 
     .social-links {

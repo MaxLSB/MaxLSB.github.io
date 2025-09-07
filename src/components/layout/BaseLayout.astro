@@ -53,16 +53,20 @@ const { title, description, image = "/default-og-image.jpg", canonicalURL = Astr
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
     <meta name="generator" content={Astro.generator} />
     <ClientRouter />
-    <script is:inline>
-      // Always use light theme
-      document.documentElement.setAttribute("data-theme", "light");
+    <script>
+      // Initialize theme from localStorage or default to light
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute("data-theme", savedTheme);
 
       // Handle theme persistence during view transitions
       document.addEventListener("astro:before-swap", (ev) => {
-        ev.newDocument.documentElement.setAttribute("data-theme", "light");
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        if (ev.newDocument && ev.newDocument.documentElement) {
+          ev.newDocument.documentElement.setAttribute("data-theme", currentTheme || 'light');
+        }
       });
 
       // Add initial-load class

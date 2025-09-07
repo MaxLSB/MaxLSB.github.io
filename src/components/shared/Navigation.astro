@@ -1,5 +1,6 @@
 ---
 import { NAVIGATION } from "../../constants/navigation";
+import ThemeToggle from "../ui/ThemeToggle.astro";
 const pathname = new URL(Astro.request.url).pathname;
 
 const isActive = (path: string) => {
@@ -18,12 +19,15 @@ const isActive = (path: string) => {
       ))
     }
   </div>
+  <ThemeToggle />
 </nav>
 
 <style>
   nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .nav-links {

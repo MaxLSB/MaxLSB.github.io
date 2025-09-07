@@ -1,9 +1,9 @@
 ---
 title: "LeCarnet"
-description: "LeCarnet is a 2M+ corpus of simple French stories for training small language models, inspired by TinyStories."
+description: "LeCarnet is a 2M+ corpus of simple French stories for training small language models."
 url: "https://github.com/MaxLSB/le-carnet"
 featured: false
-techs: ["Dataset Creation", "French NLP", "Small Language Models", "Data Generation"]
+techs: ["Dataset", "Small Language Models", "French"]
 additionalLinks:
   - label: "GitHub"
     url: "https://github.com/MaxLSB/le-carnet"

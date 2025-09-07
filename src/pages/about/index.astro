@@ -6,13 +6,13 @@ import Container from "../../components/ui/Container.astro";
 import ContentList from "../../components/shared/ContentList.astro";
 ---
 
-<BaseLayout title="About Me" description="Learn more about my background, experience, and interests">
+<BaseLayout title="About Me" description="Learn more about my background and experiences">
   <Container>
-    <BaseHero title="About Me" description="Learn more about my background, experience, and interests" />
+    <BaseHero title="About Me" description="Learn more about my background and experiences" />
     
-    <!-- Experience Section -->
+    <!-- Experiences Section -->
     <section class="section">
-      <h2>Experience</h2>
+      <h2>Experiences</h2>
       <ContentList>
         <ArticleCard
           title="AI Research Intern"
@@ -56,18 +56,25 @@ import ContentList from "../../components/shared/ContentList.astro";
           logo="/images/TSP.png"
           dateRange="2021 - 2024"
         />
+        <ArticleCard
+          title="Preparatory Classes MPSI - MP*"
+          description="Fénelon-Sainte-Marie"
+          url="#"
+          logo="/images/FSM.png"
+          dateRange="2019 - 2021"
+        />
       </ContentList>
     </section>
   </Container>
 </BaseLayout>
 
 <style>
-  .section {
-    margin-top: 3rem;
-  }
-
   .section h2 {
     margin-bottom: 1rem;
+  }
+
+  .section + .section {
+    margin-top: 3rem;
   }
 </style>
 
