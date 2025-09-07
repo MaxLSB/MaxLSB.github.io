@@ -4,50 +4,62 @@ interface Props {
   description?: string;
   url: string;
   date?: Date;
+  dateRange?: string;
   tags?: string[];
   additionalLinks?: Array<{label: string, url: string, platform?: string}>;
+  logo?: string;
 }
 
-const { title, description, url, date, tags, additionalLinks } = Astro.props;
+const { title, description, url, date, dateRange, tags, additionalLinks, logo } = Astro.props;
 import { formatDate } from "../../utils/date";
 import SocialIcon from "../SocialIcon.astro";
 ---
 
 <article class="project-card">
-  <div class="title-row">
-    <a href={url}>{title}</a>
-    <div class="title-right">
-      {date && <time datetime={date.toISOString()}>{formatDate(date)}</time>}
+  <div class="card-content">
+    {logo && (
+      <div class="logo-container">
+        <img src={logo} alt="" class="logo" />
+      </div>
+    )}
+    <div class="content">
+      <div class="title-row">
+        <a href={url}>{title}</a>
+        <div class="title-right">
+          {dateRange && <span class="date-range">{dateRange}</span>}
+          {date && !dateRange && <time datetime={date.toISOString()}>{formatDate(date)}</time>}
+          {
+            additionalLinks && additionalLinks.length > 0 && (
+              <div class="logo-group">
+                {additionalLinks.map((link) => (
+                  <a href={link.url} target="_blank" rel="noopener noreferrer" class={`logo-link ${link.platform?.toLowerCase() === 'hugging face' ? 'hf-link' : ''}`}>
+                    {link.platform && <SocialIcon platform={link.platform} size={24} />}
+                  </a>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+      <p class="muted-text">{description}</p>
       {
-        additionalLinks && additionalLinks.length > 0 && (
-          <div class="logo-group">
-            {additionalLinks.map((link) => (
-              <a href={link.url} target="_blank" rel="noopener noreferrer" class={`logo-link ${link.platform?.toLowerCase() === 'hugging face' ? 'hf-link' : ''}`}>
-                {link.platform && <SocialIcon platform={link.platform} size={24} />}
-              </a>
+        tags && (
+          <div class="tags">
+            {tags.map((tag) => (
+              <span>{tag}</span>
             ))}
           </div>
         )
       }
     </div>
   </div>
-  <p class="muted-text">{description}</p>
-  {
-    tags && (
-      <div class="tags">
-        {tags.map((tag) => (
-          <span>{tag}</span>
-        ))}
-      </div>
-    )
-  }
 </article>
 
 <style>
   .project-card {
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
-    padding: 1.5rem;
+    padding: 0.75rem;
     background: var(--bg-color);
     transition: border-color 0.2s ease;
   }
@@ -56,11 +68,39 @@ import SocialIcon from "../SocialIcon.astro";
     border-color: var(--link-color);
   }
 
+  .card-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 60px;
+  }
+
+  .logo-container {
+    flex-shrink: 0;
+  }
+
+  .logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
+  .content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+
   .title-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    margin-bottom: 0;
   }
 
   .title-row a {
@@ -115,5 +155,15 @@ import SocialIcon from "../SocialIcon.astro";
   .tags span {
     font-size: var(--text-xs);
     opacity: 0.5;
+  }
+
+  .muted-text {
+    margin: 0;
+  }
+
+  .date-range {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    white-space: nowrap;
   }
 </style>

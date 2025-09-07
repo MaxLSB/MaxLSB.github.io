@@ -1,14 +1,73 @@
 ---
 import BaseLayout from "../../components/layout/BaseLayout.astro";
 import BaseHero from "../../components/shared/BaseHero.astro";
-import Container from "../../components/ui/Container.astro";
 import ArticleCard from "../../components/ui/ArticleCard.astro";
+import Container from "../../components/ui/Container.astro";
 import ContentList from "../../components/shared/ContentList.astro";
 ---
 
 <BaseLayout title="About Me" description="Learn more about my background, experience, and interests">
   <Container>
     <BaseHero title="About Me" description="Learn more about my background, experience, and interests" />
+    
+    <!-- Experience Section -->
+    <section class="section">
+      <h2>Experience</h2>
+      <ContentList>
+        <ArticleCard
+          title="AI Research Intern"
+          description="LightOn"
+          url="#"
+          logo="/images/LightOn.png"
+          dateRange="April 2025 - ongoing"
+        />
+        <ArticleCard
+          title="AI Research Intern"
+          description="Fondazione Bruno Kessler"
+          url="#"
+          logo="/images/FBK.jpg"
+          dateRange="June 2024 - September 2024"
+        />
+      </ContentList>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section">
+      <h2>Education</h2>
+      <ContentList>
+        <ArticleCard
+          title="Master in Machine Learning"
+          description="IASD - ENS-Ulm & Paris Dauphine-PSL"
+          url="#"
+          logo="/images/IASD.png"
+          dateRange="2024 - 2025"
+        />
+        <ArticleCard
+          title="Master in Machine Learning"
+          description="MVA - ENS Paris-Saclay"
+          url="#"
+          logo="/images/MVA.png"
+          dateRange="2024 - 2025"
+        />
+        <ArticleCard
+          title="MSc in Statistics"
+          description="Télécom SudParis"
+          url="#"
+          logo="/images/TSP.png"
+          dateRange="2021 - 2024"
+        />
+      </ContentList>
+    </section>
   </Container>
 </BaseLayout>
+
+<style>
+  .section {
+    margin-top: 3rem;
+  }
+
+  .section h2 {
+    margin-bottom: 1rem;
+  }
+</style>
 
