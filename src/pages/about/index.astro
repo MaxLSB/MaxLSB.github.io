@@ -10,6 +10,10 @@ import ContentList from "../../components/shared/ContentList.astro";
   <Container>
     <BaseHero title="About Me" description="Learn more about my background and experiences" />
     
+    <p class="intro-text">
+      I'm a machine learning researcher working on post-training for LLMs and VLMs. I graduated from Télécom SudParis and pursued the IASD Master's program, hosted by ENS Ulm and Paris Dauphine–PSL, where I also took several shared courses from the MVA Master at ENS Paris-Saclay.
+    </p>
+    
     <!-- Experiences Section -->
     <section class="section">
       <h2>Experiences</h2>
@@ -98,6 +102,15 @@ import ContentList from "../../components/shared/ContentList.astro";
     position: relative;
     left: 0;
     right: 0;
+  }
+
+  .intro-text {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 1.5rem 0 2.5rem 0;
+    text-align: left;
+    max-width: none;
   }
 
   .section h2 {

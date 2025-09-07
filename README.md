@@ -1,6 +1,6 @@
-pleae# Personal Portfolio
+# Personal Portfolio
 
-🌐 **Website**: [https://maxlsb.github.io/](https://maxlsb.github.io/)
+**Website**: [https://maxlsb.github.io/](https://maxlsb.github.io/)
 
 ## License
 

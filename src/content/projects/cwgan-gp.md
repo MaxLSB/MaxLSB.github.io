@@ -1,6 +1,6 @@
 ---
 title: "cWGAN-GP"
-description: "Conditional Wasserstein Generative Adversarial Network with Gradient Penalty implementation for conditional generation tasks."
+description: "Conditional Wasserstein Generative Adversarial Network with Gradient Penalty implementation for a Kaggle competition."
 url: "https://github.com/MaxLSB/cWGAN-GP"
 featured: false
 techs: ["Generative Adversarial Networks", "PyTorch"]

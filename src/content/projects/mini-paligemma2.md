@@ -1,6 +1,6 @@
 ---
 title: "Paligemma 2"
-description: "A minimalist implementation of Paligemma 2, focusing on efficient multimodal language model architecture."
+description: "A minimalist implementation of Paligemma 2 from scratch in PyTorch."
 url: "https://github.com/MaxLSB/mini-paligemma2"
 featured: false
 techs: ["Vision-Language Models", "PyTorch", "Transformers"]

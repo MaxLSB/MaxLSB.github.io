@@ -63,7 +63,7 @@ const logoPath = getLogoPath(name);
   .model-card {
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
     background: var(--bg-color);
     transition: all 0.2s ease;
     position: relative;
@@ -79,13 +79,13 @@ const logoPath = getLogoPath(name);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .model-logo {
     flex-shrink: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,18 +167,43 @@ const logoPath = getLogoPath(name);
     }
 
     .model-logo {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 2rem;
+      height: 2rem;
     }
 
     .model-meta {
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
       gap: 0.5rem;
     }
 
     .stats {
       gap: 0.75rem;
+      flex-shrink: 0;
+    }
+  }
+
+  /* Extra small screens - ensure stats stay on the right */
+  @media (max-width: 480px) {
+    .model-meta {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.25rem;
+    }
+
+    .stats {
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .model-type {
+      font-size: 0.625rem;
+    }
+
+    .likes, .downloads {
+      font-size: 0.625rem;
     }
   }
 </style>

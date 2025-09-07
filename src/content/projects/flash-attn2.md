@@ -1,6 +1,6 @@
 ---
 title: "Flash Attention 2"
-description: "Implementation of Flash Attention 2 with sliding window support using Triton for efficient attention computation."
+description: "FlashAttention-2 for sliding window attention in Triton (forward + backward)."
 url: "https://github.com/MaxLSB/flash-attn2"
 featured: false
 techs: ["Triton", "Transformers", "GPU Optimization"]
