@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   output: "static",
-  site: "https://maxlsb.github.io",
+  site: "https://maxlsb.github.io/new-portfolio",
   base: process.env.NODE_ENV === 'development' ? '/' : "/new-portfolio",
   prefetch: true,
   compressHTML: true,
