@@ -19,11 +19,11 @@ const site = siteConfig.data;
         <img src="/images/pp_max.jpg" alt="Maxence Lasbordes" />
       </div>
       <h1>{site.name}</h1>
-      <p class="subtitle">Research Intern @LightOn</p>
+      
       {
         site.socialLinks && (
           <div class="social-links">
-            {site.socialLinks.map(({ platform, url }) => (
+            {site.socialLinks.map(({ platform, url }: { platform: string; url: string }) => (
               <a href={url} target="_blank" rel="noopener noreferrer" class="social-link">
                 <SocialIcon platform={platform} size={platform.toLowerCase() === 'hugging face' ? 18 : 14} />
                 <span>{platform}</span>
@@ -32,6 +32,17 @@ const site = siteConfig.data;
           </div>
         )
       }
+      
+      <div class="affiliations">
+        <div class="affiliation">
+          <img src="/images/LightOn.png" alt="LightOn" class="affiliation-logo" />
+          <a href="https://www.lighton.ai/" target="_blank" rel="noopener noreferrer" class="affiliation-text">@LightOn</a>
+        </div>
+        <div class="affiliation">
+          <img src="/images/kurakurai-logo.png" alt="KuraKurai" class="affiliation-logo" />
+          <a href="https://huggingface.co/kurakurai" target="_blank" rel="noopener noreferrer" class="affiliation-text">@KuraKura AI</a>
+        </div>
+      </div>
     </section>
   </Container>
 </BaseLayout>
@@ -66,7 +77,7 @@ const site = siteConfig.data;
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
     color: var(--text-color);
@@ -80,6 +91,7 @@ const site = siteConfig.data;
     color: var(--text-color);
     letter-spacing: -0.01em;
   }
+
 
   .social-links {
     display: flex;
@@ -136,6 +148,39 @@ const site = siteConfig.data;
     width: 100%;
   }
 
+  .affiliations {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .affiliation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+  }
+
+  .affiliation-text {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--link-animation-duration) ease;
+  }
+
+  .affiliation-text:hover {
+    color: var(--link-color);
+  }
+
+  .affiliation-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    opacity: 0.85;
+    border-radius: 0.5rem;
+  }
+
   @media (max-width: 640px) {
     main {
       padding: 1rem 0;
@@ -155,12 +200,13 @@ const site = siteConfig.data;
     }
 
     h1 {
-      font-size: 1.75rem;
+      font-size: 1.25rem;
     }
 
     .subtitle {
       font-size: 1.1rem;
     }
+
 
     .social-links {
       gap: 0.5rem;
@@ -175,6 +221,20 @@ const site = siteConfig.data;
 
     .social-link span {
       font-size: var(--text-xs);
+    }
+
+    .affiliations {
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .affiliation {
+      font-size: var(--text-xs);
+    }
+
+    .affiliation-logo {
+      width: 36px;
+      height: 36px;
     }
   }
 </style>

@@ -44,7 +44,7 @@ import ContentList from "../../components/shared/ContentList.astro";
         />
         <ArticleCard
           title="Master in Machine Learning"
-          description="MVA - ENS Paris-Saclay"
+          description="MVA - ENS Paris-Saclay (Cross-enrollement)"
           url="#"
           logo="/images/MVA.png"
           dateRange="2024 - 2025"
@@ -69,6 +69,37 @@ import ContentList from "../../components/shared/ContentList.astro";
 </BaseLayout>
 
 <style>
+  /* Prevent layout shift by using CSS custom properties */
+  :root {
+    --scrollbar-width: 0px;
+  }
+
+  /* Calculate scrollbar width and store it */
+  html {
+    scrollbar-gutter: stable both-edges;
+  }
+
+  /* Force consistent layout by preventing horizontal overflow */
+  body {
+    overflow-x: hidden;
+    min-width: 100vw;
+  }
+
+  /* Ensure the main container doesn't shift */
+  .container {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  /* Prevent any horizontal movement */
+  html, body {
+    position: relative;
+    left: 0;
+    right: 0;
+  }
+
   .section h2 {
     margin-bottom: 1rem;
   }
@@ -77,4 +108,10 @@ import ContentList from "../../components/shared/ContentList.astro";
     margin-top: 3rem;
   }
 </style>
+
+<script>
+  // Calculate scrollbar width to prevent layout shift
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+</script>
 

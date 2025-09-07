@@ -24,7 +24,7 @@ import SocialIcon from "../SocialIcon.astro";
     )}
     <div class="content">
       <div class="title-row">
-        <a href={url}>{title}</a>
+        <a href={url} target="_blank" rel="noopener noreferrer">{title}</a>
         <div class="title-right">
           {dateRange && <span class="date-range">{dateRange}</span>}
           {date && !dateRange && <time datetime={date.toISOString()}>{formatDate(date)}</time>}
