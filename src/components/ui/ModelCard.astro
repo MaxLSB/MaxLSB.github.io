@@ -10,10 +10,27 @@ interface Props {
 }
 
 const { name, description, url, modelType, likes, downloads, dataType } = Astro.props;
+
+// Determine which logo to use based on the model name
+const getLogoPath = (modelName: string) => {
+  if (modelName.startsWith('kurakurai/')) {
+    return '/images/kurakurai-logo.png';
+  } else if (modelName.startsWith('MaxLSB/')) {
+    return '/images/MaxLSB-logo.png';
+  }
+  return null;
+};
+
+const logoPath = getLogoPath(name);
 ---
 
 <article class="model-card" data-type={dataType}>
   <div class="model-content">
+    {logoPath && (
+      <div class="model-logo">
+        <img src={logoPath} alt={`${name.split('/')[0]} logo`} />
+      </div>
+    )}
     <div class="model-main">
       <h3 class="model-name">
         <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>
@@ -63,6 +80,22 @@ const { name, description, url, modelType, likes, downloads, dataType } = Astro.
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+  }
+
+  .model-logo {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .model-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0.25rem;
   }
 
   .model-main {
@@ -128,9 +161,14 @@ const { name, description, url, modelType, likes, downloads, dataType } = Astro.
 
   @media (max-width: 640px) {
     .model-content {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .model-logo {
+      width: 1.5rem;
+      height: 1.5rem;
     }
 
     .model-meta {

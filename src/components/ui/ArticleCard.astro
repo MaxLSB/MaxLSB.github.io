@@ -23,7 +23,7 @@ import SocialIcon from "../SocialIcon.astro";
           <div class="logo-group">
             {additionalLinks.map((link) => (
               <a href={link.url} target="_blank" rel="noopener noreferrer" class={`logo-link ${link.platform?.toLowerCase() === 'hugging face' ? 'hf-link' : ''}`}>
-                {link.platform && <SocialIcon platform={link.platform} size={20} />}
+                {link.platform && <SocialIcon platform={link.platform} size={24} />}
               </a>
             ))}
           </div>
@@ -93,8 +93,8 @@ import SocialIcon from "../SocialIcon.astro";
     color: var(--text-muted);
     transition: opacity 0.2s ease;
     padding: 0.25rem;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
   }
 
   .logo-link.hf-link {

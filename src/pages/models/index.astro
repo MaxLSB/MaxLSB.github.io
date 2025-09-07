@@ -186,7 +186,8 @@ const modelStats = await fetchAllModelStats(modelNames);
   /* Ensure the main container doesn't shift */
   .container {
     width: 100%;
-    max-width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
     box-sizing: border-box;
   }
 
@@ -256,10 +257,11 @@ const modelStats = await fetchAllModelStats(modelNames);
     
     // Initialize all cards with proper styles
     modelCards.forEach((card) => {
-      card.style.display = 'block';
-      card.style.opacity = '1';
-      card.style.transform = 'scale(1)';
-      card.style.pointerEvents = 'auto';
+      const cardElement = card as HTMLElement;
+      cardElement.style.display = 'block';
+      cardElement.style.opacity = '1';
+      cardElement.style.transform = 'scale(1)';
+      cardElement.style.pointerEvents = 'auto';
     });
     
     // Add click event listeners to all filter buttons
@@ -267,19 +269,22 @@ const modelStats = await fetchAllModelStats(modelNames);
       button.addEventListener('click', (e) => {
         e.preventDefault();
         
-        const target = e.target;
+        const target = e.target as HTMLElement;
+        if (!target) return;
+        
         const filterType = target.getAttribute('data-filter');
         
         console.log(`Filter clicked: ${filterType}`);
         
         // Update button states
-        filterButtons.forEach(btn => btn.classList.remove('active'));
+        filterButtons.forEach(btn => (btn as HTMLElement).classList.remove('active'));
         target.classList.add('active');
         
         // Filter cards based on type
         modelCards.forEach((card) => {
-          const cardType = card.getAttribute('data-type');
-          const cardName = card.querySelector('.model-name a')?.textContent?.trim() || 'Unknown';
+          const cardElement = card as HTMLElement;
+          const cardType = cardElement.getAttribute('data-type');
+          const cardName = cardElement.querySelector('.model-name a')?.textContent?.trim() || 'Unknown';
           
           let shouldShow = false;
           
@@ -292,19 +297,19 @@ const modelStats = await fetchAllModelStats(modelNames);
           }
           
           if (shouldShow) {
-            card.style.display = 'block';
-            card.style.opacity = '1';
-            card.style.transform = 'scale(1)';
-            card.style.pointerEvents = 'auto';
+            cardElement.style.display = 'block';
+            cardElement.style.opacity = '1';
+            cardElement.style.transform = 'scale(1)';
+            cardElement.style.pointerEvents = 'auto';
             console.log(`Showing: ${cardName} (${cardType})`);
           } else {
-            card.style.opacity = '0';
-            card.style.transform = 'scale(0.95)';
-            card.style.pointerEvents = 'none';
+            cardElement.style.opacity = '0';
+            cardElement.style.transform = 'scale(0.95)';
+            cardElement.style.pointerEvents = 'none';
             // Hide after transition completes
             setTimeout(() => {
-              if (card.style.opacity === '0') {
-                card.style.display = 'none';
+              if (cardElement.style.opacity === '0') {
+                cardElement.style.display = 'none';
               }
             }, 200);
             console.log(`Hiding: ${cardName} (${cardType})`);
