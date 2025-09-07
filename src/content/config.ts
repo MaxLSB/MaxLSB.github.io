@@ -41,6 +41,11 @@ const projects = defineCollection({
         url: z.string().url(),
         featured: z.boolean().optional().default(false),
         techs: z.array(z.string()).optional(),
+        additionalLinks: z.array(z.object({
+            label: z.string(),
+            url: z.string().url(),
+            platform: z.string().optional(),
+        })).optional(),
     })
 });
 
@@ -111,6 +116,7 @@ const publications = defineCollection({
         authors: z.array(z.string()),
         venue: z.string(),
         year: z.number(),
+        date: z.coerce.date().optional(),
         url: z.string().url().optional(),
         pdf: z.string().url().optional(),
         abstract: z.string().optional(),

@@ -16,12 +16,13 @@ const site = siteConfig.data;
   <Container>
     <section class="hero">
       <h1>{site.name}</h1>
+      <p class="subtitle">Research Intern @LightOn</p>
       {
         site.socialLinks && (
           <div class="social-links">
             {site.socialLinks.map(({ platform, url }) => (
               <a href={url} target="_blank" rel="noopener noreferrer" class="social-link">
-                <SocialIcon platform={platform} size={14} />
+                <SocialIcon platform={platform} size={platform.toLowerCase() === 'hugging face' ? 18 : 14} />
                 <span>{platform}</span>
               </a>
             ))}
@@ -46,10 +47,17 @@ const site = siteConfig.data;
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 3rem;
+    margin-bottom: 0.75rem;
     color: var(--text-color);
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--text-muted);
   }
 
   .social-links {
@@ -101,7 +109,11 @@ const site = siteConfig.data;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 1.75rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
     }
 
     .social-links {

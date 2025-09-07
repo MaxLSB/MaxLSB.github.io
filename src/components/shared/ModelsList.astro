@@ -1,0 +1,16 @@
+<div class="models-list">
+  <slot />
+</div>
+<style>
+  .models-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .models-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

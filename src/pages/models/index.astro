@@ -1,0 +1,331 @@
+---
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import BaseHero from "../../components/shared/BaseHero.astro";
+import ModelCard from "../../components/ui/ModelCard.astro";
+import Container from "../../components/ui/Container.astro";
+import ModelsList from "../../components/shared/ModelsList.astro";
+import { fetchAllModelStats } from "../../utils/modelStats";
+
+// Model data - you can move this to a separate file if needed
+const models = [
+  {
+    name: "kurakurai/Luth-LFM2-1.2B",
+    description: "French fine-tuned version of LFM2-1.2B in collaboration with Liquid AI, trained on the Luth-SFT dataset. Improved French capabilities in instruction following, math, and general knowledge.",
+    url: "https://huggingface.co/kurakurai/Luth-LFM2-1.2B",
+    modelType: "Text Generation • 1.2B"
+  },
+  {
+    name: "kurakurai/Luth-LFM2-700M",
+    description: "French fine-tuned version of LFM2-700M in collaboration with Liquid AI, trained on the Luth-SFT dataset. Improved French capabilities while maintaining stable English performance.",
+    url: "https://huggingface.co/kurakurai/Luth-LFM2-700M",
+    modelType: "Text Generation • 700M"
+  },
+  {
+    name: "kurakurai/Luth-LFM2-350M",
+    description: "French fine-tuned version of LFM2-350M in collaboration with Liquid AI, trained on the Luth-SFT dataset. Enhanced French capabilities with stable English performance.",
+    url: "https://huggingface.co/kurakurai/Luth-LFM2-350M",
+    modelType: "Text Generation • 350M"
+  },
+  {
+    name: "kurakurai/Luth-1.7B-Instruct",
+    description: "A 1.7B parameter instruction-tuned model for French language tasks, providing high-quality responses in French.",
+    url: "https://huggingface.co/kurakurai/Luth-1.7B-Instruct",
+    modelType: "Text Generation • 1.7B"
+  },
+  {
+    name: "kurakurai/Luth-0.6B-Instruct",
+    description: "A compact 0.6B parameter instruction-tuned model optimized for French language tasks with efficient performance.",
+    url: "https://huggingface.co/kurakurai/Luth-0.6B-Instruct",
+    modelType: "Text Generation • 600M"
+  },
+  {
+    name: "MaxLSB/LeCarnet-21M",
+    description: "A 21M parameter model trained on French text, designed for efficient French language understanding and generation.",
+    url: "https://huggingface.co/MaxLSB/LeCarnet-21M",
+    modelType: "Text Generation • 21M"
+  },
+  {
+    name: "MaxLSB/LeCarnet-8M",
+    description: "A lightweight 8M parameter model for French language tasks, optimized for speed and efficiency.",
+    url: "https://huggingface.co/MaxLSB/LeCarnet-8M",
+    modelType: "Text Generation • 8M"
+  },
+  {
+    name: "MaxLSB/LeCarnet-3M",
+    description: "An ultra-lightweight 3M parameter model for basic French language processing tasks.",
+    url: "https://huggingface.co/MaxLSB/LeCarnet-3M",
+    modelType: "Text Generation • 3M"
+  },
+  {
+    name: "MaxLSB/Splitformer",
+    description: "A novel transformer architecture with split attention mechanisms for improved efficiency and performance.",
+    url: "https://huggingface.co/MaxLSB/Splitformer",
+    modelType: "Automatic Speech Recognition"
+  },
+  {
+    name: "kurakurai/scholar",
+    description: "French dataset of Baccalauréat and Classes Préparatoires (CPGE) exam questions and detailed solutions. Covers mathematics, physics, chemistry, and computer science. Contains 30.3K annotated samples designed for French-language NLP research and education.",
+    url: "https://huggingface.co/datasets/kurakurai/scholar",
+    modelType: "Dataset • 30.3k"
+  },
+  {
+    name: "kurakurai/luth-sft",
+    description: "French dataset for instruction following, math, and general knowledge. Contains ~338M tokens in French, used to fine-tune Luth models. Includes data from French Baccalauréat, CPGE exams, and translated datasets.",
+    url: "https://huggingface.co/datasets/kurakurai/luth-sft",
+    modelType: "Dataset • 571k"
+  },
+  {
+    name: "MaxLSB/LeCarnet",
+    description: "Synthetic French dataset for training small language models. Contains 2.03M rows of French text data, designed for efficient French language understanding and generation.",
+    url: "https://huggingface.co/datasets/MaxLSB/LeCarnet",
+    modelType: "Dataset • 2.03M"
+  }
+];
+
+// Sort models by custom order: Luth-LFM2 (biggest to smallest), then Luth-Instruct, then luth-sft, then LeCarnet models, then LeCarnet dataset, then Splitformer
+const sortedModels = models.sort((a, b) => {
+  const getModelOrder = (name: string) => {
+    if (name.includes('Luth-LFM2')) {
+      // Luth-LFM2 models: order by size (biggest to smallest)
+      if (name.includes('1.2B')) return 1;
+      if (name.includes('700M')) return 2;
+      if (name.includes('350M')) return 3;
+      return 4;
+    }
+    if (name.includes('Luth') && name.includes('Instruct')) {
+      // Luth-Instruct models: order by size (biggest to smallest)
+      if (name.includes('1.7B')) return 5;
+      if (name.includes('0.6B')) return 6;
+      return 7;
+    }
+    if (name.includes('luth-sft')) {
+      return 8;
+    }
+    if (name.includes('scholar')) {
+      return 9;
+    }
+    if (name.includes('LeCarnet-21M') || name.includes('LeCarnet-8M') || name.includes('LeCarnet-3M')) {
+      // LeCarnet models: order by size (biggest to smallest)
+      if (name.includes('21M')) return 10;
+      if (name.includes('8M')) return 11;
+      if (name.includes('3M')) return 12;
+      return 13;
+    }
+    if (name === 'MaxLSB/LeCarnet') {
+      return 14;
+    }
+    if (name.includes('Splitformer')) {
+      return 15;
+    }
+    return 15;
+  };
+
+  return getModelOrder(a.name) - getModelOrder(b.name);
+});
+
+// Fetch model statistics server-side
+const modelNames = sortedModels.map(model => model.name);
+const modelStats = await fetchAllModelStats(modelNames);
+---
+
+<BaseLayout title="Models" description="Models I've trained and published">
+  <Container>
+    <BaseHero 
+      title="Models" 
+      description="Models I've trained and published" 
+    />
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="models">Models</button>
+      <button class="filter-btn" data-filter="datasets">Datasets</button>
+    </div>
+    
+    <ModelsList>
+      {
+        sortedModels.map((model) => {
+          // Define what should be considered datasets vs models
+          const isDataset = model.name === 'kurakurai/scholar' || model.name === 'kurakurai/luth-sft' || model.name === 'MaxLSB/LeCarnet';
+          // Define what should be excluded from "models" filter (LeCarnet models only)
+          const isExcludedFromModels = model.name.includes('LeCarnet-');
+          const dataType = isDataset ? 'dataset' : (isExcludedFromModels ? 'excluded' : 'model');
+          
+          return (
+            <ModelCard
+              name={model.name}
+              description={model.description}
+              url={model.url}
+              modelType={model.modelType}
+              likes={modelStats[model.name]?.likes || 0}
+              downloads={modelStats[model.name]?.downloads || 0}
+              dataType={dataType}
+            />
+          );
+        })
+      }
+    </ModelsList>
+  </Container>
+</BaseLayout>
+
+<style>
+  /* Prevent layout shift by using CSS custom properties */
+  :root {
+    --scrollbar-width: 0px;
+  }
+
+  /* Calculate scrollbar width and store it */
+  html {
+    scrollbar-gutter: stable both-edges;
+  }
+
+  /* Force consistent layout by preventing horizontal overflow */
+  body {
+    overflow-x: hidden;
+    min-width: 100vw;
+  }
+
+  /* Ensure the main container doesn't shift */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Prevent any horizontal movement */
+  html, body {
+    position: relative;
+    left: 0;
+    right: 0;
+  }
+
+  .filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: var(--text-sm);
+  }
+
+  .filter-btn:hover {
+    border-color: var(--link-color);
+    background: var(--hover-bg);
+  }
+
+  .filter-btn.active {
+    background: var(--link-color);
+    color: white;
+    border-color: var(--link-color);
+  }
+
+  /* Ensure smooth transitions without layout shifts */
+  .model-card {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .model-card[style*="display: none"] {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+
+</style>
+
+<script>
+  // Model filtering functionality
+  function initModelFiltering() {
+    console.log('Initializing model filtering...');
+    
+    // Calculate scrollbar width to prevent layout shift
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+    console.log(`Scrollbar width: ${scrollbarWidth}px`);
+    
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const modelCards = document.querySelectorAll('.model-card');
+    
+    console.log(`Found ${filterButtons.length} buttons and ${modelCards.length} cards`);
+    
+    // Initialize all cards with proper styles
+    modelCards.forEach((card) => {
+      card.style.display = 'block';
+      card.style.opacity = '1';
+      card.style.transform = 'scale(1)';
+      card.style.pointerEvents = 'auto';
+    });
+    
+    // Add click event listeners to all filter buttons
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const target = e.target;
+        const filterType = target.getAttribute('data-filter');
+        
+        console.log(`Filter clicked: ${filterType}`);
+        
+        // Update button states
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        target.classList.add('active');
+        
+        // Filter cards based on type
+        modelCards.forEach((card) => {
+          const cardType = card.getAttribute('data-type');
+          const cardName = card.querySelector('.model-name a')?.textContent?.trim() || 'Unknown';
+          
+          let shouldShow = false;
+          
+          if (filterType === 'all') {
+            shouldShow = true;
+          } else if (filterType === 'models' && cardType === 'model') {
+            shouldShow = true;
+          } else if (filterType === 'datasets' && cardType === 'dataset') {
+            shouldShow = true;
+          }
+          
+          if (shouldShow) {
+            card.style.display = 'block';
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+            card.style.pointerEvents = 'auto';
+            console.log(`Showing: ${cardName} (${cardType})`);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            card.style.pointerEvents = 'none';
+            // Hide after transition completes
+            setTimeout(() => {
+              if (card.style.opacity === '0') {
+                card.style.display = 'none';
+              }
+            }, 200);
+            console.log(`Hiding: ${cardName} (${cardType})`);
+          }
+        });
+        
+        console.log('Filtering complete');
+      });
+    });
+    
+    console.log('Model filtering initialized successfully');
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initModelFiltering);
+  } else {
+    initModelFiltering();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initModelFiltering);
+</script>
+

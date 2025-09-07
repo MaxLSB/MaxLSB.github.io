@@ -7,17 +7,40 @@ import Container from "../../components/ui/Container.astro";
 import ContentList from "../../components/shared/ContentList.astro";
 
 const projects = await getCollection("projects");
+
+// Define the desired order
+const projectOrder = [
+  "Luth x LFM2",
+  "Luth", 
+  "LeCarnet",
+  "Flash Attention 2",
+  "Paligemma 2",
+  "cWGAN",
+  "Word2Vec",
+  "VolleyJudge"
+];
+
 const sortedProjects = projects.sort((a, b) => {
-  // Featured projects first, then by title
-  if (a.data.featured && !b.data.featured) return -1;
-  if (!a.data.featured && b.data.featured) return 1;
+  const indexA = projectOrder.indexOf(a.data.title);
+  const indexB = projectOrder.indexOf(b.data.title);
+  
+  // If both projects are in the order list, sort by their position
+  if (indexA !== -1 && indexB !== -1) {
+    return indexA - indexB;
+  }
+  
+  // If only one is in the list, prioritize it
+  if (indexA !== -1) return -1;
+  if (indexB !== -1) return 1;
+  
+  // If neither is in the list, sort alphabetically
   return a.data.title.localeCompare(b.data.title);
 });
 ---
 
-<BaseLayout title="Projects" description="Personal and professional projects I've worked on">
+<BaseLayout title="Projects" description="Personal projects and open source contributions">
   <Container>
-    <BaseHero title="Projects" description="Personal and professional projects I've worked on" />
+    <BaseHero title="Projects" description="Personal projects and open source contributions" />
     <ContentList>
       {
         sortedProjects.map((project) => (
@@ -26,6 +49,7 @@ const sortedProjects = projects.sort((a, b) => {
             description={project.data.description}
             url={project.data.url}
             tags={project.data.techs}
+            additionalLinks={project.data.additionalLinks}
           />
         ))
       }

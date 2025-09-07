@@ -5,30 +5,33 @@ interface Props {
   url: string;
   date?: Date;
   tags?: string[];
-  additionalLinks?: Array<{label: string, url: string}>;
+  additionalLinks?: Array<{label: string, url: string, platform?: string}>;
 }
 
 const { title, description, url, date, tags, additionalLinks } = Astro.props;
 import { formatDate } from "../../utils/date";
+import SocialIcon from "../SocialIcon.astro";
 ---
 
-<article>
+<article class="project-card">
   <div class="title-row">
     <a href={url}>{title}</a>
-    {date && <time datetime={date.toISOString()}>{formatDate(date)}</time>}
+    <div class="title-right">
+      {date && <time datetime={date.toISOString()}>{formatDate(date)}</time>}
+      {
+        additionalLinks && additionalLinks.length > 0 && (
+          <div class="logo-group">
+            {additionalLinks.map((link) => (
+              <a href={link.url} target="_blank" rel="noopener noreferrer" class={`logo-link ${link.platform?.toLowerCase() === 'hugging face' ? 'hf-link' : ''}`}>
+                {link.platform && <SocialIcon platform={link.platform} size={20} />}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
   </div>
   <p class="muted-text">{description}</p>
-  {
-    additionalLinks && additionalLinks.length > 0 && (
-      <div class="additional-links">
-        {additionalLinks.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-button">
-            {link.label}
-          </a>
-        ))}
-      </div>
-    )
-  }
   {
     tags && (
       <div class="tags">
@@ -41,10 +44,22 @@ import { formatDate } from "../../utils/date";
 </article>
 
 <style>
+  .project-card {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    background: var(--bg-color);
+    transition: border-color 0.2s ease;
+  }
+
+  .project-card:hover {
+    border-color: var(--link-color);
+  }
+
   .title-row {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
   }
 
@@ -58,32 +73,37 @@ import { formatDate } from "../../utils/date";
     color: var(--link-color);
   }
 
-  .tags {
+  .title-right {
     display: flex;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
+    align-items: center;
+    gap: 1rem;
   }
 
-  .additional-links {
+  .logo-group {
     display: flex;
-    gap: 0.75rem;
-    margin: 0.75rem 0;
+    gap: 0.25rem;
+    align-items: center;
   }
 
-  .link-button {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    font-size: var(--text-sm);
+  .logo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
-    color: var(--link-color);
-    border: 1px solid var(--link-color);
-    border-radius: 0.375rem;
-    transition: all 0.2s ease;
+    color: var(--text-muted);
+    transition: opacity 0.2s ease;
+    padding: 0.25rem;
+    width: 24px;
+    height: 24px;
   }
 
-  .link-button:hover {
-    background-color: var(--link-color);
-    color: var(--bg-color);
+  .logo-link.hf-link {
+    width: 28px;
+    height: 28px;
+  }
+
+  .logo-link:hover {
+    opacity: 0.7;
   }
 
   .tags {

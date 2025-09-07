@@ -2,6 +2,7 @@
 title: "Splitformer: An improved early-exit architecture for automatic speech recognition on edge devices"
 authors: ["Maxence Lasbordes", "Daniele Falavigna", "Alessio Brutti"]
 venue: "EUSIPCO"
+date: "2025-06-01"
 year: 2025
 url: "https://arxiv.org/abs/2506.18035"
 pdf: "https://arxiv.org/abs/2506.18035"

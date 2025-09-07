@@ -14,6 +14,10 @@ export const NAVIGATION: Navigation = [
         path: "/projects",
     },
     {
+        name: "Models",
+        path: "/models",
+    },
+    {
         name: "Blog",
         path: "/blog",
     },
