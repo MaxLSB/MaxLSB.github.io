@@ -8,23 +8,28 @@ interface Props {
   tags?: string[];
   additionalLinks?: Array<{label: string, url: string, platform?: string}>;
   logo?: string;
+  clickable?: boolean;
 }
 
-const { title, description, url, date, dateRange, tags, additionalLinks, logo } = Astro.props;
+const { title, description, url, date, dateRange, tags, additionalLinks, logo, clickable = true } = Astro.props;
 import { formatDate } from "../../utils/date";
 import SocialIcon from "../SocialIcon.astro";
 ---
 
-<article class="project-card">
+<article class={`project-card ${clickable ? 'clickable' : ''}`}>
   <div class="card-content">
     {logo && (
       <div class="logo-container">
-        <img src={logo} alt="" class="logo" />
+        <img src={logo} alt="" class="logo" width="48" height="48" />
       </div>
     )}
     <div class="content">
       <div class="title-row">
-        <a href={url} target="_blank" rel="noopener noreferrer">{title}</a>
+        {clickable ? (
+          <a href={url} target="_blank" rel="noopener noreferrer">{title}</a>
+        ) : (
+          <span class="title-text">{title}</span>
+        )}
         <div class="title-right">
           {dateRange && <span class="date-range">{dateRange}</span>}
           {date && !dateRange && <time datetime={date.toISOString()}>{formatDate(date)}</time>}
@@ -64,7 +69,7 @@ import SocialIcon from "../SocialIcon.astro";
     transition: border-color 0.2s ease;
   }
 
-  .project-card:hover {
+  .project-card.clickable:hover {
     border-color: var(--link-color);
   }
 
@@ -111,6 +116,11 @@ import SocialIcon from "../SocialIcon.astro";
 
   .title-row a:hover {
     color: var(--link-color);
+  }
+
+  .title-text {
+    font-size: var(--text-lg);
+    color: var(--text-color);
   }
 
   .title-right {

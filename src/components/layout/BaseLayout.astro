@@ -41,6 +41,8 @@ const { title, description, image = "/default-og-image.jpg", canonicalURL = Astr
 
     <!-- Preload critical images -->
     <link rel="preload" href="/images/pp_max.jpg" as="image" type="image/jpeg" />
+    <link rel="preload" href="/images/LightOn.png" as="image" type="image/png" />
+    <link rel="preload" href="/images/kurakurai-logo.png" as="image" type="image/png" />
 
     <link rel="canonical" href={canonicalURL} />
 
@@ -60,17 +62,11 @@ const { title, description, image = "/default-og-image.jpg", canonicalURL = Astr
     <meta name="generator" content={Astro.generator} />
     <ClientRouter />
     <script>
-      // Image loading optimization
+      // Simple image error handling
       document.addEventListener('DOMContentLoaded', function() {
-        // Handle image loading states
         const images = document.querySelectorAll('img');
         images.forEach(img => {
-          img.addEventListener('load', function() {
-            this.style.opacity = '1';
-          });
-          
           img.addEventListener('error', function() {
-            this.style.opacity = '1'; // Show broken image placeholder
             console.warn('Failed to load image:', this.src);
           });
         });
