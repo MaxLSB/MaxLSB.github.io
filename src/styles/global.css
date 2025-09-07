@@ -284,6 +284,23 @@ img {
   height: auto;
   display: block;
   border-radius: 0.5rem;
+  /* Optimize image rendering */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  /* Smooth loading transition */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show images when loaded */
+img[loading="eager"],
+img[loading="lazy"] {
+  opacity: 1;
+}
+
+/* Critical images should load immediately */
+img[fetchpriority="high"] {
+  opacity: 1;
 }
 
 figure {

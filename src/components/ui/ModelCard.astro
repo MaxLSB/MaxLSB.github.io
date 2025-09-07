@@ -28,7 +28,13 @@ const logoPath = getLogoPath(name);
   <div class="model-content">
     {logoPath && (
       <div class="model-logo">
-        <img src={logoPath} alt={`${name.split('/')[0]} logo`} />
+        <img 
+          src={logoPath} 
+          alt={`${name.split('/')[0]} logo`} 
+          loading="lazy"
+          width="32"
+          height="32"
+        />
       </div>
     )}
     <div class="model-main">

@@ -16,7 +16,14 @@ const site = siteConfig.data;
   <Container>
     <section class="hero">
       <div class="profile-picture">
-        <img src="/images/pp_max.jpg" alt="Maxence Lasbordes" />
+        <img 
+          src="/images/pp_max.jpg" 
+          alt="Maxence Lasbordes" 
+          loading="eager"
+          fetchpriority="high"
+          width="200"
+          height="200"
+        />
       </div>
       <h1>{site.name}</h1>
       
@@ -35,11 +42,25 @@ const site = siteConfig.data;
       
       <div class="affiliations">
         <div class="affiliation">
-          <img src="/images/LightOn.png" alt="LightOn" class="affiliation-logo" />
+          <img 
+            src="/images/LightOn.png" 
+            alt="LightOn" 
+            class="affiliation-logo" 
+            loading="lazy"
+            width="48"
+            height="48"
+          />
           <a href="https://www.lighton.ai/" target="_blank" rel="noopener noreferrer" class="affiliation-text">@LightOn</a>
         </div>
         <div class="affiliation">
-          <img src="/images/kurakurai-logo.png" alt="KuraKurai" class="affiliation-logo" />
+          <img 
+            src="/images/kurakurai-logo.png" 
+            alt="KuraKurai" 
+            class="affiliation-logo" 
+            loading="lazy"
+            width="48"
+            height="48"
+          />
           <a href="https://huggingface.co/kurakurai" target="_blank" rel="noopener noreferrer" class="affiliation-text">@KuraKura AI</a>
         </div>
       </div>
