@@ -70,7 +70,7 @@ body {
 
 main {
   width: 100%;
-  max-width: 640px;
+  max-width: 768px;
   margin: 0 auto;
   padding: 2rem 0;
   position: relative;
@@ -217,7 +217,7 @@ a {
   transition: opacity var(--link-animation-duration);
 }
 
-a:not(.category-link)::after {
+a:not(.category-link):not(.social-link)::after {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -228,13 +228,12 @@ a:not(.category-link)::after {
   transition: width var(--link-animation-duration) ease;
 }
 
-a:not(.category-link):hover::after {
+a:not(.category-link):not(.social-link):hover::after {
   width: 100%;
 }
 
 /* Special links that should not have the default style */
-.section-header a,
-.social-links a {
+.section-header a {
   color: var(--text-color);
   text-decoration: none;
 }

@@ -36,14 +36,16 @@ const site = siteConfig.data;
 <style>
   main {
     width: 100%;
-    max-width: 640px;
+    max-width: 768px;
     margin: 0 auto;
     padding: 2rem 0;
+    overflow-x: hidden;
   }
 
   .hero {
     padding: 4rem 0;
     text-align: center;
+    overflow-x: hidden;
   }
 
   h1 {
@@ -66,7 +68,8 @@ const site = siteConfig.data;
     justify-content: center;
     flex-wrap: nowrap;
     margin-top: 2rem;
-    overflow-x: auto;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   .social-link {
@@ -74,7 +77,7 @@ const site = siteConfig.data;
     align-items: center;
     justify-content: center;
     gap: 0.375rem;
-    color: var(--text-muted);
+    color: var(--text-color);
     text-decoration: none;
     font-size: var(--text-xs);
     padding: 0.375rem 0.5rem;
@@ -84,19 +87,34 @@ const site = siteConfig.data;
     white-space: nowrap;
     flex-shrink: 0;
     min-height: 2rem;
-    transition: opacity 0.2s ease;
+    transition: color var(--link-animation-duration) ease;
+    transform: none;
   }
 
   .social-link:hover {
-    opacity: 0.8;
-  }
-
-  .social-link::after {
-    display: none !important;
+    color: var(--link-color);
+    transform: none;
   }
 
   .social-link span {
+    position: relative;
+    transition: color var(--link-animation-duration) ease;
     font-size: var(--text-sm);
+  }
+
+  .social-link span::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width var(--link-animation-duration) ease;
+  }
+
+  .social-link:hover span::after {
+    width: 100%;
   }
 
   @media (max-width: 640px) {
