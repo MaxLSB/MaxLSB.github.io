@@ -68,6 +68,9 @@ const logoPath = getLogoPath(name);
     transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    letter-spacing: -0.02em;
   }
 
   .model-card:hover {
@@ -108,6 +111,8 @@ const logoPath = getLogoPath(name);
     font-size: var(--text-sm);
     font-weight: 500;
     line-height: 1.3;
+    font-family: var(--font-primary);
+    letter-spacing: -0.02em;
   }
 
   .model-name a {
@@ -126,12 +131,17 @@ const logoPath = getLogoPath(name);
     gap: 0.5rem;
     font-size: var(--text-sm);
     color: var(--text-muted);
+    font-family: var(--font-primary);
+    font-weight: 300;
+    letter-spacing: -0.02em;
   }
 
   .model-type {
     font-size: var(--text-xs);
     color: var(--text-muted);
     font-weight: 400;
+    font-family: var(--font-primary);
+    letter-spacing: -0.02em;
   }
 
   .stats {
@@ -147,6 +157,8 @@ const logoPath = getLogoPath(name);
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    font-family: var(--font-primary);
+    letter-spacing: -0.02em;
   }
 
   .heart-icon, .download-icon {
