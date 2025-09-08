@@ -28,6 +28,7 @@ const sortedPublications = publications.sort((a, b) => b.data.year - a.data.year
               url={`/publications/${publication.id}/`}
               date={publication.data.date ? new Date(publication.data.date) : new Date(publication.data.year, 0, 1)}
               additionalLinks={additionalLinks}
+              noBorder={true}
             />
           );
         })

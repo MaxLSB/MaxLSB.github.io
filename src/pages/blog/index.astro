@@ -24,6 +24,7 @@ const sortedPosts = posts.sort((a, b) => b.data.publishedAt.getTime() - a.data.p
             description={post.data.description}
             url={post.data.externalUrl || `/blog/${post.id}`}
             date={post.data.publishedAt}
+            noBorder={true}
           />
         ))
       }
