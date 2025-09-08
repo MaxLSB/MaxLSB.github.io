@@ -93,6 +93,32 @@ const { title, description, image = "/default-og-image.jpg", canonicalURL = Astr
           document.documentElement.classList.add("theme-transition");
         }, 1000);
       });
+
+      // Prevent layout shifts on Windows
+      function preventLayoutShifts() {
+        // Force scrollbar to always be present to prevent layout shifts
+        const html = document.documentElement;
+        const body = document.body;
+        
+        // Ensure consistent dimensions
+        html.style.height = '100%';
+        html.style.width = '100%';
+        body.style.height = '100%';
+        body.style.width = '100%';
+        
+        // Force scrollbar gutter to be stable
+        if (CSS.supports('scrollbar-gutter', 'stable both-edges')) {
+          html.style.scrollbarGutter = 'stable both-edges';
+        }
+        
+        // Prevent horizontal overflow
+        html.style.overflowX = 'hidden';
+        body.style.overflowX = 'hidden';
+      }
+
+      // Run on page load and view transitions
+      document.addEventListener("DOMContentLoaded", preventLayoutShifts);
+      document.addEventListener("astro:page-load", preventLayoutShifts);
     </script>
   </head>
   <body>

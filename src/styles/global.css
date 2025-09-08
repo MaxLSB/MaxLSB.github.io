@@ -44,8 +44,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   letter-spacing: -0.02em;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: stable both-edges;
   overflow-x: hidden;
+  /* Prevent layout shifts */
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -62,6 +65,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Prevent layout shifts */
+  height: 100%;
+  /* Ensure consistent box model */
+  box-sizing: border-box;
 }
 
 .astro-code * {
@@ -75,6 +82,9 @@ main {
   padding: 2rem 0;
   position: relative;
   overflow-x: hidden;
+  /* Prevent layout shifts */
+  min-height: calc(100vh - 4rem);
+  box-sizing: border-box;
 }
 
 .nav-container {
@@ -83,6 +93,9 @@ main {
   justify-content: space-between;
   margin-bottom: 2rem;
   padding: 0 1.5rem;
+  /* Prevent layout shifts */
+  position: relative;
+  z-index: 10;
 }
 
 @media (max-width: 640px) {
@@ -107,6 +120,10 @@ body::after {
   z-index: 1;
   pointer-events: none;
   animation: noise 8s steps(10) infinite;
+  /* Prevent layout shifts */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: auto;
 }
 
 body::before {
@@ -131,7 +148,7 @@ body::before {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
-  will-change: transform;
+  will-change: auto;
 }
 
 .bottom-glow {
@@ -396,6 +413,28 @@ hr {
 :focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--border-color);
+}
+
+/* Prevent layout shifts on Windows */
+@supports (scrollbar-gutter: stable) {
+  html {
+    scrollbar-gutter: stable both-edges;
+  }
+}
+
+/* Windows-specific fixes */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  
+  main {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+  }
 }
 
 /* Utility Classes */
