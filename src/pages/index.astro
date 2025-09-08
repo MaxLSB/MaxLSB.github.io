@@ -79,6 +79,12 @@ const site = siteConfig.data;
     padding: 1.5rem 0 3rem 0;
     text-align: center;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 8rem);
+    transform: translateY(-1rem);
   }
 
   .profile-picture {
@@ -219,11 +225,12 @@ const site = siteConfig.data;
 
     .hero {
       padding: 0.5rem 0 2rem 0;
-      min-height: calc(100vh - 1.5rem);
+      min-height: calc(100vh - 3rem);
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
+      transform: translateY(-3rem);
     }
 
     .profile-picture {
@@ -305,7 +312,8 @@ const site = siteConfig.data;
   @media (max-width: 480px) {
     .hero {
       padding: 0.5rem 0 1.5rem 0;
-      min-height: calc(100vh - 1rem);
+      min-height: calc(100vh - 2rem);
+      transform: translateY(-2.5rem);
     }
 
     .profile-picture img {
