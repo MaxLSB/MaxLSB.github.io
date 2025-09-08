@@ -101,10 +101,24 @@ main {
 @media (max-width: 640px) {
   main {
     padding: 1rem 0;
+    min-height: calc(100vh - 2rem);
   }
 
   .nav-container {
     padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 0.75rem 0;
+    min-height: calc(100vh - 1.5rem);
+  }
+
+  .nav-container {
+    padding: 0 0.75rem;
+    margin-bottom: 0.75rem;
   }
 }
 
@@ -449,6 +463,31 @@ hr {
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Improve touch targets */
+  button, a, input, textarea, select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better spacing for mobile */
+  .card {
+    padding: 1rem;
+  }
+
+  /* Prevent zoom on input focus */
+  input, textarea, select {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 0.75rem;
+  }
 }
 
 h1,

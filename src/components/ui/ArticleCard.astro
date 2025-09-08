@@ -184,4 +184,132 @@ import SocialIcon from "../SocialIcon.astro";
     font-size: var(--text-xs);
     white-space: nowrap;
   }
+
+  time {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .project-card {
+      padding: 0.5rem;
+    }
+
+    .card-content {
+      gap: 0.75rem;
+      min-height: 50px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .title-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .title-right {
+      align-self: stretch;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .title-row a,
+    .title-text {
+      font-size: var(--text-lg);
+      color: var(--text-color);
+    }
+
+    .title-row a:hover {
+      color: var(--link-color);
+    }
+
+    .logo-link {
+      width: 22px;
+      height: 22px;
+      padding: 0.2rem;
+    }
+
+    .logo-link.hf-link {
+      width: 24px;
+      height: 24px;
+    }
+
+    .tags {
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tags span {
+      font-size: 0.65rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .title-row a,
+    .title-text {
+      font-size: var(--text-lg);
+      color: var(--text-color);
+    }
+
+    .title-row a:hover {
+      color: var(--link-color);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-card {
+      padding: 0.375rem;
+    }
+
+    .card-content {
+      gap: 0.5rem;
+      min-height: 45px;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+    }
+
+    .title-row a,
+    .title-text {
+      font-size: var(--text-base);
+      color: var(--text-color);
+    }
+
+    .title-row a:hover {
+      color: var(--link-color);
+    }
+
+    .title-right {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .logo-link {
+      width: 20px;
+      height: 20px;
+      padding: 0.15rem;
+    }
+
+    .logo-link.hf-link {
+      width: 22px;
+      height: 22px;
+    }
+
+    .date-range {
+      font-size: 0.65rem;
+    }
+
+    time {
+      font-size: 0.65rem;
+    }
+  }
 </style>

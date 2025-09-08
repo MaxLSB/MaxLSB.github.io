@@ -15,5 +15,44 @@ const { title, description } = Astro.props;
 <style>
   .hero {
     padding: 2rem 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 1.5rem 0;
+    }
+
+    .hero h1 {
+      font-size: var(--text-2xl);
+    }
+
+    .subtitle {
+      font-size: var(--text-base);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 1rem 0;
+    }
+
+    .hero h1 {
+      font-size: var(--text-xl);
+    }
+
+    .subtitle {
+      font-size: var(--text-sm);
+    }
   }
 </style>
