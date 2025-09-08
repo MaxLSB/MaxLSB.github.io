@@ -100,8 +100,8 @@ main {
 
 @media (max-width: 640px) {
   main {
-    padding: 1rem 0;
-    min-height: calc(100vh - 2rem);
+    padding: 1.5rem 0;
+    min-height: calc(100vh - 3rem);
   }
 
   .nav-container {
@@ -112,8 +112,8 @@ main {
 
 @media (max-width: 480px) {
   main {
-    padding: 0.75rem 0;
-    min-height: calc(100vh - 1.5rem);
+    padding: 1rem 0;
+    min-height: calc(100vh - 2rem);
   }
 
   .nav-container {
