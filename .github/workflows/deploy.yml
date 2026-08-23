@@ -21,31 +21,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      
+      # pnpm must be installed before setup-node, so setup-node can resolve the
+      # pnpm store itself. The previous hand-rolled cache read the store path via
+      # `pnpm store path --silent`, which prints nothing on pnpm 10 — the empty
+      # value then failed actions/cache's required `path` input.
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
-      
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-      
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-      
+          node-version: '22'
+          cache: 'pnpm'
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       
       - name: Build
         run: pnpm run build
