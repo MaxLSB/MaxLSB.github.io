@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import BaseLayout from "../../components/layout/BaseLayout.astro";
+import Container from "../../components/ui/Container.astro";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("blog");
@@ -30,33 +31,28 @@ const formatDate = (date: Date) => {
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="post">
-    <header>
-      <h1>{post.data.title}</h1>
-      <time datetime={post.data.publishedAt.toISOString()}>
-        {formatDate(post.data.publishedAt)}
-      </time>
-    </header>
-    <div class="content">
-      <Content />
-    </div>
-  </article>
+  <Container>
+    <article class="post">
+      <header>
+        <h1>{post.data.title}</h1>
+        <time datetime={post.data.publishedAt.toISOString()}>
+          {formatDate(post.data.publishedAt)}
+        </time>
+      </header>
+      <div class="content">
+        <Content />
+      </div>
+    </article>
+  </Container>
 </BaseLayout>
 
 <style>
-  main {
-    width: 100%;
-    max-width: 768px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
-
   .post {
-    margin-top: 2rem;
+    padding: 1rem 0 2rem;
   }
 
   header {
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
   }
 
   h1 {
@@ -69,55 +65,26 @@ const formatDate = (date: Date) => {
   }
 
   .content {
-    line-height: 1.7;
+    line-height: 1.75;
   }
 
   .content :global(h2) {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .content :global(h3) {
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   .content :global(p) {
     margin-bottom: 1.25rem;
+    max-width: 70ch;
   }
 
   .content :global(img) {
-    border-radius: 0.5rem;
     margin: 1.5rem 0;
-  }
-
-  .content :global(blockquote) {
-    border-left: 3px solid var(--border-color);
-    padding-left: 1.5rem;
-    margin: 1.5rem 0;
-    color: var(--text-muted);
-  }
-
-  .content :global(pre) {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background: var(--hover-bg);
-    overflow-x: auto;
-    margin: 1.5rem 0;
-  }
-
-  .content :global(p) {
-    max-width: 100%;
-  }
-
-  .content :global(code) {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-  }
-
-  .content :global(a) {
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
   }
 
   .content :global(ul),
@@ -128,11 +95,5 @@ const formatDate = (date: Date) => {
 
   .content :global(li) {
     margin: 0.5rem 0;
-  }
-
-  @media (max-width: 640px) {
-    main {
-      padding: 1rem;
-    }
   }
 </style>

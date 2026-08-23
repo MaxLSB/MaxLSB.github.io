@@ -11,7 +11,7 @@ import ContentList from "../../components/shared/ContentList.astro";
     <BaseHero title="About Me" description="Learn more about my background and experiences" />
     
     <p class="intro-text">
-      I'm a machine learning researcher working on post-training for LLMs and VLMs. I graduated from Télécom SudParis and pursued the IASD Master's program, hosted by ENS Ulm and Paris Dauphine–PSL, where I also took several shared courses from the MVA Master at ENS Paris-Saclay.
+      I'm a PhD student at LightOn and INRIA working on post-training for LLMs. I graduated from Télécom SudParis and pursued the IASD Master's program, hosted by ENS Ulm and Paris Dauphine–PSL, where I also took several shared courses from the MVA Master at ENS Paris-Saclay.
     </p>
     
     <!-- Experiences Section -->
@@ -19,11 +19,19 @@ import ContentList from "../../components/shared/ContentList.astro";
       <h2>Experiences</h2>
       <ContentList>
         <ArticleCard
+          title="PhD Student"
+          description="LightOn & INRIA (CIFRE)"
+          url="#"
+          logo="/images/LightOn.png"
+          dateRange="February 2026 - ongoing"
+          clickable={false}
+        />
+        <ArticleCard
           title="AI Research Intern"
           description="LightOn"
           url="#"
           logo="/images/LightOn.png"
-          dateRange="April 2025 - ongoing"
+          dateRange="April 2025 - September 2025"
           clickable={false}
         />
         <ArticleCard
@@ -50,14 +58,6 @@ import ContentList from "../../components/shared/ContentList.astro";
           clickable={false}
         />
         <ArticleCard
-          title="Master in Machine Learning"
-          description="MVA - ENS Paris-Saclay (Cross-enrollement)"
-          url="#"
-          logo="/images/MVA.png"
-          dateRange="2024 - 2025"
-          clickable={false}
-        />
-        <ArticleCard
           title="MSc in Statistics"
           description="Télécom SudParis"
           url="#"
@@ -79,58 +79,32 @@ import ContentList from "../../components/shared/ContentList.astro";
 </BaseLayout>
 
 <style>
-  /* Prevent layout shift by using CSS custom properties */
-  :root {
-    --scrollbar-width: 0px;
-  }
-
-  /* Calculate scrollbar width and store it */
-  html {
-    scrollbar-gutter: stable both-edges;
-  }
-
-  /* Force consistent layout by preventing horizontal overflow */
-  body {
-    overflow-x: hidden;
-    min-width: 100vw;
-  }
-
-  /* Ensure the main container doesn't shift */
-  .container {
-    width: 100%;
-    max-width: 768px;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  /* Prevent any horizontal movement */
-  html, body {
-    position: relative;
-    left: 0;
-    right: 0;
-  }
-
   .intro-text {
     font-size: var(--text-lg);
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--text-muted);
-    margin: 1.5rem 0 2.5rem 0;
-    text-align: left;
-    max-width: none;
+    margin: 1.5rem 0 3rem;
+    max-width: 68ch;
   }
 
   .section h2 {
+    padding-bottom: 0.5rem;
     margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
   }
 
   .section + .section {
     margin-top: 3rem;
   }
+
+  @media (max-width: 640px) {
+    .intro-text {
+      font-size: var(--text-base);
+      margin: 1.25rem 0 2rem;
+    }
+
+    .section + .section {
+      margin-top: 2rem;
+    }
+  }
 </style>
-
-<script>
-  // Calculate scrollbar width to prevent layout shift
-  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-  document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
-</script>
-

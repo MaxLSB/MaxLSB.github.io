@@ -18,7 +18,7 @@ const getIcon = (platform: string) => {
         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
       </svg>`;
     case 'hugging face':
-      return `<img src="/images/companies/hf_logo.png" width="${size}" height="${size}" alt="Hugging Face" class="hf-logo" style="object-fit: contain;" />`;
+      return `<img src="/images/companies/hf_logo.png" width="${size}" height="${size}" alt="" class="hf-logo" style="object-fit: contain;" />`;
     case 'scholar':
       return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="#4285F4">
         <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
@@ -38,70 +38,43 @@ const getIcon = (platform: string) => {
 <span class="social-icon" set:html={getIcon(platform)}></span>
 
 <style>
+  /*
+   * Icons inherit their colour from the surrounding link, so hover/active states
+   * live in one place. Previously dark mode forced #ffffff and light mode #000000
+   * here, which fought the theme tokens and was the harshest contrast on the page.
+   */
   .social-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 1;
-    font-size: 1em;
     width: 100%;
     height: 100%;
-    color: var(--text-color);
-    opacity: 0.9;
-    transition: opacity var(--transition-base), color var(--transition-base);
+    color: inherit;
   }
-  
-  .social-icon:hover {
-    color: var(--link-color);
-    opacity: 1;
-  }
-  
+
   .social-icon svg,
   .social-icon img {
     display: block;
-    vertical-align: middle;
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-  
+
   .social-icon img.hf-logo {
-    transform: scale(1.2);
+    transform: scale(1.15);
   }
-  
-  /* Override specific colors for logos that should maintain their brand colors */
+
+  /* Brand-coloured marks keep their own colour in both themes */
   .social-icon svg[fill="#0077B5"] {
-    fill: #0077B5 !important;
+    fill: #0077b5;
   }
-  
+
   .social-icon svg[fill="#4285F4"] {
-    fill: #4285F4 !important;
+    fill: #4285f4;
   }
-  
-  /* Ensure X and GitHub icons have good contrast */
+
   .social-icon svg[fill="currentColor"] {
     fill: currentColor;
-  }
-  
-  /* Dark mode: Make X and GitHub icons more contrasted */
-  [data-theme="dark"] .social-icon svg[fill="currentColor"] {
-    fill: #ffffff;
-    opacity: 0.9;
-  }
-  
-  [data-theme="dark"] .social-icon:hover svg[fill="currentColor"] {
-    fill: var(--link-color);
-    opacity: 1;
-  }
-  
-  /* Light mode: Make X and GitHub icons darker and more contrasted */
-  [data-theme="light"] .social-icon svg[fill="currentColor"] {
-    fill: #000000;
-    opacity: 0.9;
-  }
-  
-  [data-theme="light"] .social-icon:hover svg[fill="currentColor"] {
-    fill: var(--link-color);
-    opacity: 1;
   }
 </style>

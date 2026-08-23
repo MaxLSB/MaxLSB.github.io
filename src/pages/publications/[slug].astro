@@ -1,242 +1,187 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
 import BaseLayout from "../../components/layout/BaseLayout.astro";
 import Container from "../../components/ui/Container.astro";
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const publications = await getCollection("publications");
   return publications.map((publication) => ({
     params: { slug: publication.id },
     props: { publication },
   }));
-}
+}) satisfies GetStaticPaths;
 
 const { publication } = Astro.props;
+
+// Markdown body has to go through render(); `publication.body` is the raw source
+const { Content } = await render(publication);
+
+const links = [
+  publication.data.url && { label: "Paper", url: publication.data.url },
+  publication.data.pdf && publication.data.pdf !== publication.data.url && { label: "PDF", url: publication.data.pdf },
+  publication.data.github && { label: "Code", url: publication.data.github },
+  publication.data.huggingface && { label: "Models", url: publication.data.huggingface },
+].filter(Boolean) as Array<{ label: string; url: string }>;
+
+/*
+ * Abstracts are multi-paragraph YAML flow scalars. YAML folds line breaks inside
+ * a paragraph into spaces and collapses a blank line to a single "\n", so a
+ * single newline — not a blank line — is the paragraph separator here.
+ */
+const abstractParagraphs =
+  publication.data.abstract
+    ?.split(/\n+/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean) ?? [];
 ---
 
-<BaseLayout title={publication.data.title} description={publication.data.abstract || ""}>
+<BaseLayout title={publication.data.title} description={publication.data.abstract ?? publication.data.title}>
   <Container>
-    <article class="publication-detail">
+    <article class="publication">
       <header class="publication-header">
         <h1>{publication.data.title}</h1>
-        <div class="publication-meta">
-          <p class="authors">{publication.data.authors.join(", ")}</p>
-          <p class="venue">{publication.data.venue} ({publication.data.year})</p>
-        </div>
-        
-        {publication.data.abstract && (
-          <div class="abstract">
-            <h2>Abstract</h2>
-            <p>{publication.data.abstract}</p>
-          </div>
-        )}
+        <p class="authors">{publication.data.authors.join(", ")}</p>
+        <p class="venue">{publication.data.venue} ({publication.data.year})</p>
 
-        <div class="publication-links">
-          {publication.data.url && (
-            <a href={publication.data.url} target="_blank" rel="noopener noreferrer" class="link-button">
-              View Paper
-            </a>
-          )}
-          {publication.data.huggingface && (
-            <a href={publication.data.huggingface} target="_blank" rel="noopener noreferrer" class="link-button">
-              Model
-            </a>
-          )}
-          {publication.data.github && (
-            <a href={publication.data.github} target="_blank" rel="noopener noreferrer" class="link-button">
-              GitHub
-            </a>
-          )}
-        </div>
-
-        {publication.data.tags && (
-          <div class="tags">
-            {publication.data.tags.map((tag) => (
-              <span class="tag">{tag}</span>
-            ))}
-          </div>
-        )}
+        {
+          links.length > 0 && (
+            <nav class="publication-links" aria-label="Publication links">
+              {links.map((link) => (
+                <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-button">
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          )
+        }
       </header>
 
+      {
+        abstractParagraphs.length > 0 && (
+          <section class="abstract">
+            <h2>Abstract</h2>
+            {abstractParagraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </section>
+        )
+      }
+
+      {
+        publication.data.tags && publication.data.tags.length > 0 && (
+          <ul class="tags">
+            {publication.data.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+
       <div class="publication-content">
-        <div set:html={publication.body} />
+        <Content />
       </div>
     </article>
   </Container>
 </BaseLayout>
 
 <style>
-  .publication-detail {
-    max-width: 800px;
-    margin: 0 auto;
+  .publication {
+    padding: 1rem 0 2rem;
   }
 
   .publication-header {
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
   }
 
   .publication-header h1 {
     font-size: var(--text-2xl);
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-color);
-  }
-
-  .publication-meta {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .authors {
-    font-size: var(--text-lg);
-    font-weight: 500;
-    margin-bottom: 0.5rem;
     color: var(--text-color);
+    margin-bottom: 0.125rem;
   }
 
+  /* Was var(--muted-text-color) — a token that does not exist, so this had no colour */
   .venue {
-    font-size: var(--text-base);
-    color: var(--muted-text-color);
-    margin: 0;
-  }
-
-  .abstract {
-    margin-bottom: 0.5rem;
-    padding: 1.5rem;
-    background-color: var(--bg-secondary);
-    border-radius: 0.5rem;
-    border-left: 4px solid var(--link-color);
-  }
-
-  .abstract h2 {
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-color);
-  }
-
-  .abstract p {
-    margin: 0;
-    line-height: 1.6;
-    color: var(--text-color);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    margin-bottom: 0;
   }
 
   .publication-links {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
     flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
   }
 
   .link-button {
-    display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: 0.35rem 0.85rem;
     font-size: var(--text-sm);
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--link-color);
-    border: 1px solid var(--link-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color-strong);
     border-radius: 0.375rem;
-    transition: all 0.2s ease;
+    transition: color var(--transition-base), border-color var(--transition-base);
   }
 
   .link-button:hover {
-    background-color: var(--link-color);
-    color: var(--bg-color);
-  }
-
-  .link-button.primary {
-    background-color: var(--link-color);
-    color: var(--bg-color);
-  }
-
-  .link-button.primary:hover {
-    background-color: transparent;
     color: var(--link-color);
+    border-color: var(--link-color);
+  }
+
+  .link-button::after {
+    display: none; /* opt out of the global prose underline */
+  }
+
+  .abstract {
+    margin-top: 2rem;
+  }
+
+  .abstract h2 {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .abstract p {
+    max-width: 70ch;
+    margin-bottom: 0.875rem;
   }
 
   .tags {
     display: flex;
-    gap: 0.75rem;
     flex-wrap: wrap;
-  }
-
-  .tag {
-    font-size: var(--text-xs);
-    padding: 0.25rem 0.5rem;
-    background-color: var(--bg-secondary);
-    color: var(--muted-text-color);
-    border-radius: 0.25rem;
-  }
-
-  .publication-content {
-    line-height: 1.7;
-  }
-
-  .publication-content h2 {
-    font-size: var(--text-xl);
-    font-weight: 600;
-    margin: 2rem 0 1rem 0;
-    color: var(--text-color);
-  }
-
-  .publication-content h3 {
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin: 1.5rem 0 0.75rem 0;
-    color: var(--text-color);
-  }
-
-  .publication-content p {
-    margin-bottom: 1rem;
-    color: var(--text-color);
-  }
-
-  .publication-content ul, .publication-content ol {
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
-  }
-
-  .publication-content li {
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-  }
-
-  .publication-content a {
-    color: var(--link-color);
-    text-decoration: none;
-  }
-
-  .publication-content a:hover {
-    text-decoration: underline;
-  }
-
-  .publication-content pre {
-    background-color: var(--bg-secondary);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
-    margin: 1rem 0;
-  }
-
-  .publication-content code {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-  }
-
-  .publication-content pre code {
-    background: none;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 2rem 0 0;
     padding: 0;
   }
 
-  @media (max-width: 768px) {
-    .publication-links {
-      flex-direction: column;
-    }
+  .tags li {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    /* Was var(--bg-secondary) — undefined, so these chips rendered flat */
+    background-color: var(--bg-color-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    padding: 0.1rem 0.45rem;
+    margin: 0;
+  }
 
-    .link-button {
-      text-align: center;
+  .publication-content:not(:empty) {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 640px) {
+    .publication-header h1 {
+      font-size: var(--text-xl);
     }
   }
 </style>

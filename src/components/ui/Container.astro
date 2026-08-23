@@ -12,20 +12,7 @@ const { class: className } = Astro.props;
 
 <style>
   .container {
-    padding: 0 1.5rem;
-  }
-
-  @media (max-width: 640px) {
-    .container {
-      padding: 0 1rem;
-      max-width: 100%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      padding: 0 0.75rem;
-    }
+    /* Same gutter token as the nav, so page content lines up with the nav links */
+    padding: 0 var(--gutter);
   }
 </style>
-

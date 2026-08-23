@@ -7,7 +7,14 @@ import Container from "../../components/ui/Container.astro";
 import ContentList from "../../components/shared/ContentList.astro";
 
 const publications = await getCollection("publications");
-const sortedPublications = publications.sort((a, b) => b.data.year - a.data.year);
+
+// Most recent first: use the explicit date when present, otherwise fall back to the year
+const sortDate = (publication: (typeof publications)[number]) =>
+  publication.data.date
+    ? new Date(publication.data.date).getTime()
+    : new Date(publication.data.year, 0, 1).getTime();
+
+const sortedPublications = publications.sort((a, b) => sortDate(b) - sortDate(a));
 ---
 
 <BaseLayout title="Publications" description="Research papers and academic publications">
@@ -24,9 +31,9 @@ const sortedPublications = publications.sort((a, b) => b.data.year - a.data.year
           return (
             <ArticleCard
               title={publication.data.title}
-              description={`${publication.data.authors.join(", ")} - ${publication.data.venue} (${publication.data.year})`}
+              description={publication.data.authors.join(", ")}
               url={`/publications/${publication.id}/`}
-              date={publication.data.date ? new Date(publication.data.date) : new Date(publication.data.year, 0, 1)}
+              badge={`${publication.data.venue} ${publication.data.year}`}
               additionalLinks={additionalLinks}
               noBorder={true}
             />
