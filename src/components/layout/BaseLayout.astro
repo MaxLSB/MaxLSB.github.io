@@ -42,13 +42,10 @@ const ogImage = new URL(image, Astro.site ?? Astro.url);
     -->
     <script is:inline>
       (() => {
+        // Light is the default: the OS "prefers dark" setting is deliberately not
+        // consulted. Only an explicit choice made with the toggle is honoured.
         const stored = localStorage.getItem("theme");
-        const theme =
-          stored === "light" || stored === "dark"
-            ? stored
-            : window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light";
+        const theme = stored === "light" || stored === "dark" ? stored : "light";
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>

@@ -31,6 +31,17 @@ const site = siteConfig.data;
       <h1>{site.name}</h1>
       <p class="tagline">PhD student</p>
 
+      <div class="affiliations">
+        <a href="https://www.lighton.ai/" target="_blank" rel="noopener noreferrer" class="affiliation">
+          <img src="/images/LightOn.png" alt="" class="mark" width="36" height="36" />
+          <span>@LightOn</span>
+        </a>
+        <a href="https://www.inria.fr/en" target="_blank" rel="noopener noreferrer" class="affiliation">
+          <img src="/images/INRIA.svg" alt="" class="mark wordmark" width="86" height="25" />
+          <span>@INRIA</span>
+        </a>
+      </div>
+
       {
         site.socialLinks && (
           <nav class="social-links" aria-label="Elsewhere">
@@ -43,13 +54,6 @@ const site = siteConfig.data;
           </nav>
         )
       }
-
-      <div class="affiliations">
-        <a href="https://www.lighton.ai/" target="_blank" rel="noopener noreferrer" class="affiliation">
-          <img src="/images/LightOn.png" alt="" width="40" height="40" />
-          <span>@LightOn</span>
-        </a>
-      </div>
     </section>
   </Container>
 </BaseLayout>
@@ -117,36 +121,52 @@ const site = siteConfig.data;
     border-color: var(--border-color-strong);
   }
 
+  /*
+   * Affiliations are a tier above the social links: larger marks, full-strength
+   * text, no enclosure. Boxing them made them read as more social buttons, which
+   * is exactly what they are not.
+   */
   .affiliations {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.25rem;
+    gap: 2rem;
     flex-wrap: wrap;
+    margin-top: 0.25rem;
   }
 
   .affiliation {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--text-muted);
-    font-size: var(--text-sm);
+    gap: 0.625rem;
+    color: var(--text-color);
+    font-size: var(--text-lg);
     transition: color var(--transition-base);
   }
 
   .affiliation:hover {
-    color: var(--text-color);
-  }
-
-  .affiliation img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    border-radius: 0.375rem;
+    color: var(--link-color);
   }
 
   .affiliation::after {
     display: none; /* opt out of the global prose underline */
+  }
+
+  /* Square marks are sized by their side, wide wordmarks by their height */
+  .affiliation .mark {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .affiliation .mark.wordmark {
+    width: auto;
+    height: 25px;
+    /*
+     * The Inria mark is lowercase script with a tail swoosh, set beside all-caps
+     * text whose mass sits higher; it needs a lift the geometry alone misses.
+     */
+    transform: translateY(-4px);
   }
 
   @media (max-width: 640px) {
