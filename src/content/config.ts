@@ -51,6 +51,10 @@ const publications = defineCollection({
         tags: z.array(z.string()).optional(),
         huggingface: z.string().url().optional(),
         github: z.string().url().optional(),
+        additionalLinks: z.array(z.object({
+            label: z.string(),
+            url: z.string().url(),
+        })).optional(),
     })
 });
 

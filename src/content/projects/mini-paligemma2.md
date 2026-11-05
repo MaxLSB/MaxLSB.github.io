@@ -3,7 +3,7 @@ title: "Paligemma 2"
 description: "A minimalist implementation of Paligemma 2 from scratch in PyTorch."
 url: "https://github.com/MaxLSB/mini-paligemma2"
 featured: false
-techs: ["Vision-Language Models", "PyTorch", "Transformers"]
+techs: ["Vision Language Models", "Transformers", "PyTorch"]
 additionalLinks:
   - label: "GitHub"
     url: "https://github.com/MaxLSB/mini-paligemma2" 

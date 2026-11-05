@@ -3,7 +3,7 @@ title: "LeCarnet"
 description: "LeCarnet is a 2M+ corpus of simple French stories for training small language models."
 url: "https://github.com/MaxLSB/le-carnet"
 featured: false
-techs: ["Dataset", "Small Language Models", "French"]
+techs: ["Small Language Models", "Datasets", "French"]
 additionalLinks:
   - label: "GitHub"
     url: "https://github.com/MaxLSB/le-carnet"

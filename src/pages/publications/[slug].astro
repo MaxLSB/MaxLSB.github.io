@@ -22,6 +22,7 @@ const links = [
   publication.data.pdf && publication.data.pdf !== publication.data.url && { label: "PDF", url: publication.data.pdf },
   publication.data.github && { label: "Code", url: publication.data.github },
   publication.data.huggingface && { label: "Models", url: publication.data.huggingface },
+  ...(publication.data.additionalLinks ?? []),
 ].filter(Boolean) as Array<{ label: string; url: string }>;
 
 /*

@@ -1,95 +1,93 @@
 ---
 import BaseLayout from "../../components/layout/BaseLayout.astro";
 import BaseHero from "../../components/shared/BaseHero.astro";
-import ArticleCard from "../../components/ui/ArticleCard.astro";
+import ResumeEntry from "../../components/ui/ResumeEntry.astro";
 import Container from "../../components/ui/Container.astro";
-import ContentList from "../../components/shared/ContentList.astro";
+
+const education = [
+  {
+    title: "Sorbonne Université",
+    subtitle: "PhD · Artificial Intelligence",
+    dates: "2025 - 2026",
+    logos: [{ src: "/images/Sorbonne.svg", name: "Sorbonne Université" }],
+  },
+  {
+    title: "ENS Ulm & Paris Dauphine–PSL",
+    subtitle: "Master in Machine Learning · IASD",
+    dates: "2024 - 2025",
+    logos: [{ src: "/images/IASD.png", name: "IASD" }],
+  },
+  {
+    title: "Télécom SudParis",
+    subtitle: "MSc in Statistics",
+    dates: "2021 - 2025",
+    logos: [{ src: "/images/TSP.png", name: "Télécom SudParis" }],
+  },
+  {
+    title: "Fénelon-Sainte-Marie",
+    subtitle: "Preparatory Classes · MPSI – MP*",
+    dates: "2019 - 2021",
+    logos: [{ src: "/images/FSM.png", name: "Fénelon-Sainte-Marie" }],
+  },
+];
 ---
 
 <BaseLayout title="About Me" description="Learn more about my background and experiences">
   <Container>
     <BaseHero title="About Me" description="Learn more about my background and experiences" />
-    
-    <p class="intro-text">
-      I'm a PhD student at LightOn and INRIA working on post-training for LLMs. I graduated from Télécom SudParis and pursued the IASD Master's program, hosted by ENS Ulm and Paris Dauphine–PSL, where I also took several shared courses from the MVA Master at ENS Paris-Saclay.
-    </p>
-    
-    <!-- Experiences Section -->
-    <section class="section">
-      <h2>Experiences</h2>
-      <ContentList>
-        <ArticleCard
-          title="PhD Student"
-          description="LightOn & INRIA (CIFRE)"
-          url="#"
-          logo="/images/LightOn.png"
-          dateRange="February 2026 - ongoing"
-          clickable={false}
-        />
-        <ArticleCard
-          title="AI Research Intern"
-          description="LightOn"
-          url="#"
-          logo="/images/LightOn.png"
-          dateRange="April 2025 - September 2025"
-          clickable={false}
-        />
-        <ArticleCard
-          title="AI Research Intern"
-          description="Fondazione Bruno Kessler"
-          url="#"
-          logo="/images/FBK.png"
-          dateRange="June 2024 - September 2024"
-          clickable={false}
-        />
-      </ContentList>
+
+    <section class="section" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <ol class="resume-list" role="list">
+        <li>
+          <ol class="career-progression" role="list" aria-label="Roles at LightOn">
+            <li>
+              <ResumeEntry
+                title="PhD Student"
+                subtitle="LightOn & Inria · CIFRE"
+                dates="nov. 2025 - nov. 2026"
+                logos={[
+                  { src: "/images/LightOn.png", name: "LightOn" },
+                ]}
+              />
+            </li>
+            <li>
+              <ResumeEntry
+                title="AI Research Intern"
+                subtitle="LightOn"
+                dates="avr. 2025 - oct. 2025"
+                logos={[{ src: "/images/LightOn.png", name: "LightOn" }]}
+              />
+            </li>
+          </ol>
+        </li>
+        <li>
+          <ResumeEntry
+            title="AI Research Intern"
+            subtitle="Fondazione Bruno Kessler"
+            dates="juin 2024 - sept. 2024"
+            logos={[{ src: "/images/FBK.png", name: "Fondazione Bruno Kessler" }]}
+          />
+        </li>
+      </ol>
     </section>
 
-    <!-- Education Section -->
-    <section class="section">
-      <h2>Education</h2>
-      <ContentList>
-        <ArticleCard
-          title="Master in Machine Learning"
-          description="IASD - ENS-Ulm & Paris Dauphine-PSL"
-          url="#"
-          logo="/images/IASD.png"
-          dateRange="2024 - 2025"
-          clickable={false}
-        />
-        <ArticleCard
-          title="MSc in Statistics"
-          description="Télécom SudParis"
-          url="#"
-          logo="/images/TSP.png"
-          dateRange="2021 - 2024"
-          clickable={false}
-        />
-        <ArticleCard
-          title="Preparatory Classes MPSI - MP*"
-          description="Fénelon-Sainte-Marie"
-          url="#"
-          logo="/images/FSM.png"
-          dateRange="2019 - 2021"
-          clickable={false}
-        />
-      </ContentList>
+    <section class="section" aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+      <ol class="resume-list" role="list">
+        {education.map((entry) => (
+          <li><ResumeEntry {...entry} /></li>
+        ))}
+      </ol>
     </section>
   </Container>
 </BaseLayout>
 
 <style>
-  .intro-text {
-    font-size: var(--text-lg);
-    line-height: 1.75;
-    color: var(--text-muted);
-    margin: 1.5rem 0 3rem;
-    max-width: 68ch;
-  }
-
   .section h2 {
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
+    font-size: var(--text-xl);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
   }
 
@@ -97,14 +95,57 @@ import ContentList from "../../components/shared/ContentList.astro";
     margin-top: 3rem;
   }
 
+  .resume-list,
+  .career-progression {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .resume-list > li,
+  .career-progression > li {
+    margin: 0;
+  }
+
+  .resume-list > li + li {
+    border-top: 1px solid var(--border-color);
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .career-progression > li {
+    position: relative;
+  }
+
+  .career-progression {
+    --career-logo-size: 56px;
+    --career-gap: 1.75rem;
+  }
+
+  .career-progression > li + li {
+    margin-top: var(--career-gap);
+  }
+
+  /* Span the actual row height, including text that wraps on narrow screens. */
+  .career-progression > li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: calc(var(--career-logo-size) / 2);
+    top: calc(var(--career-logo-size) + 4px);
+    bottom: calc(4px - var(--career-gap));
+    width: 1px;
+    transform: translateX(-50%);
+    background: var(--border-color-strong);
+    pointer-events: none;
+  }
+
   @media (max-width: 640px) {
-    .intro-text {
-      font-size: var(--text-base);
-      margin: 1.25rem 0 2rem;
+    .section + .section {
+      margin-top: 2.5rem;
     }
 
-    .section + .section {
-      margin-top: 2rem;
+    .career-progression {
+      --career-logo-size: 48px;
     }
   }
 </style>
