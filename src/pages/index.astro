@@ -3,202 +3,377 @@ import { getEntry } from "astro:content";
 import BaseLayout from "../components/layout/BaseLayout.astro";
 import Container from "../components/ui/Container.astro";
 import SocialIcon from "../components/SocialIcon.astro";
+import ActivityGallery from "../components/ui/ActivityGallery.astro";
+import { activity } from "../data/activity";
 
 const siteConfig = await getEntry("site", "home");
 if (!siteConfig) {
   throw new Error("Site configuration not found");
 }
-
 const site = siteConfig.data;
+const photoRowAspectRatio = Math.max(...activity.map((item) =>
+  item.photos?.reduce((sum, photo) => sum + photo.src.width / photo.src.height, 0) ?? 0
+));
 ---
 
 <BaseLayout
   title={site.name}
-  description="Maxence Lasbordes - PhD student working on post-training for LLMs and multilinguality"
+  description="Maxence Lasbordes — research on post-training and multilingual language models. Recent papers, model releases, and conferences."
 >
   <Container>
-    <section class="hero">
-      <img
-        class="avatar"
-        src="/images/pp_max.jpg"
-        alt="Maxence Lasbordes"
-        loading="eager"
-        fetchpriority="high"
-        width="200"
-        height="200"
-      />
-
-      <h1>{site.name}</h1>
-      <p class="tagline">PhD student</p>
-
-      <div class="affiliations">
-        <a href="https://www.lighton.ai/" target="_blank" rel="noopener noreferrer" class="affiliation">
-          <img src="/images/LightOn.png" alt="" class="mark" width="36" height="36" />
-          <span>@LightOn</span>
-        </a>
-        <a href="https://www.inria.fr/en" target="_blank" rel="noopener noreferrer" class="affiliation">
-          <img src="/images/INRIA.svg" alt="" class="mark wordmark" width="86" height="25" />
-          <span>@INRIA</span>
-        </a>
+    <section class="profile" aria-labelledby="profile-name">
+      <div class="profile-heading">
+        <div class="identity">
+          <h1 id="profile-name">{site.name}</h1>
+          <p class="role">PhD Student · RL, Agents, Multilinguality</p>
+          <div class="affiliations">
+            <a href="https://www.lighton.ai/" target="_blank" rel="noopener noreferrer" class="affiliation" aria-label="LightOn">
+              <img class="lighton-mark lighton-mark-light" src="/images/LightOn-wordmark.svg" alt="" width="56" height="20" />
+              <img class="lighton-mark lighton-mark-dark" src="/images/LightOn-wordmark-dark.svg" alt="" width="56" height="20" />
+            </a>
+            <span class="affiliation-divider" aria-hidden="true">&</span>
+            <a href="https://www.inria.fr/en" target="_blank" rel="noopener noreferrer" class="affiliation">
+              <img class="inria-mark" src="/images/INRIA.svg" alt="" width="56" height="20" />
+              <span class="sr-only">Inria</span>
+            </a>
+          </div>
+        </div>
+        <img
+          class="avatar"
+          src="/images/pp_max.jpg"
+          alt="Maxence Lasbordes"
+          loading="eager"
+          fetchpriority="high"
+          width="128"
+          height="128"
+        />
       </div>
+      {site.socialLinks && (
+        <nav class="social-links" aria-label="Elsewhere">
+          {site.socialLinks.map(({ platform, url }) => (
+            <a href={url} target="_blank" rel="noopener noreferrer" class="social-link">
+              <span class="social-icon-box" aria-hidden="true">
+                <SocialIcon platform={platform} size={platform.toLowerCase() === "hugging face" ? 17 : 15} />
+              </span>
+              <span>{platform}</span>
+            </a>
+          ))}
+        </nav>
+      )}
+    </section>
 
-      {
-        site.socialLinks && (
-          <nav class="social-links" aria-label="Elsewhere">
-            {site.socialLinks.map(({ platform, url }: { platform: string; url: string }) => (
-              <a href={url} target="_blank" rel="noopener noreferrer" class="social-link">
-                <SocialIcon platform={platform} size={platform.toLowerCase() === "hugging face" ? 17 : 14} />
-                <span>{platform}</span>
-              </a>
-            ))}
-          </nav>
-        )
-      }
+    <section class="activity" aria-label="Recent activity">
+      <ol class="timeline" role="list">
+        {activity.map((item) => (
+          <li class="timeline-item">
+            <time datetime={item.datetime}>{item.month}</time>
+            <article id={item.id} class="activity-entry" aria-labelledby={`${item.id}-heading`}>
+              <p class="category">{item.category}</p>
+              <h2 id={`${item.id}-heading`}>{item.title}</h2>
+              <p class="entry-description">{item.description}</p>
+              <nav class="entry-links" aria-label={`Resources for ${item.title}`}>
+                {item.links.map((link) => (
+                  <a href={link.url} target={link.url.startsWith("https://") ? "_blank" : undefined} rel={link.url.startsWith("https://") ? "noopener noreferrer" : undefined}>
+                    {link.label}<span aria-hidden="true"> {link.url.startsWith("https://") ? "↗" : "→"}</span>
+                  </a>
+                ))}
+              </nav>
+              {item.photos && <ActivityGallery id={item.id} photos={item.photos} rowAspectRatio={photoRowAspectRatio} />}
+            </article>
+          </li>
+        ))}
+      </ol>
     </section>
   </Container>
 </BaseLayout>
 
 <style>
-  /*
-   * svh (small viewport height) rather than vh: on mobile, vh is the *large*
-   * viewport, so the block used to overflow behind the browser chrome — which is
-   * what the old `transform: translateY(-12rem)` hacks were compensating for.
-   */
-  .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.25rem;
-    min-height: calc(100svh - 10rem);
-    justify-content: center;
-    padding: 2rem 0 3rem;
+  .profile {
+    padding: 0.75rem 0 2.75rem;
   }
 
-  .avatar {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--border-color);
+  .profile-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 112px;
+    align-items: center;
+    gap: 2rem;
   }
 
   h1 {
     margin: 0;
+    font-size: 2rem;
+    text-wrap: pretty;
   }
 
-  .tagline {
+  .role {
+    margin: 0.5rem 0 0.45rem;
     color: var(--text-muted);
     font-size: var(--text-lg);
-    margin: -0.75rem 0 0;
-    max-width: 46ch;
-    text-wrap: balance;
   }
 
-  .social-links {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 100%;
-  }
-
-  .social-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.375rem 0.625rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-    white-space: nowrap;
-    transition: color var(--transition-base), border-color var(--transition-base);
-  }
-
-  .social-link:hover {
-    color: var(--text-color);
-    border-color: var(--border-color-strong);
-  }
-
-  /*
-   * Affiliations are a tier above the social links: larger marks, full-strength
-   * text, no enclosure. Boxing them made them read as more social buttons, which
-   * is exactly what they are not.
-   */
   .affiliations {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 2rem;
     flex-wrap: wrap;
-    margin-top: 0.25rem;
+    gap: 0.625rem;
   }
 
   .affiliation {
     display: inline-flex;
     align-items: center;
-    gap: 0.625rem;
+    gap: 0.4rem;
     color: var(--text-color);
-    font-size: var(--text-lg);
-    transition: color var(--transition-base);
+    font-size: var(--text-base);
+  }
+
+  .affiliation::after {
+    display: none;
   }
 
   .affiliation:hover {
     color: var(--link-color);
   }
 
-  .affiliation::after {
-    display: none; /* opt out of the global prose underline */
-  }
-
-  /* Square marks are sized by their side, wide wordmarks by their height */
-  .affiliation .mark {
-    width: 36px;
-    height: 36px;
+  .affiliation img {
+    width: 24px;
+    height: 24px;
     object-fit: contain;
   }
 
-  .affiliation .mark.wordmark {
-    width: auto;
-    height: 25px;
-    /*
-     * The Inria mark is lowercase script with a tail swoosh, set beside all-caps
-     * text whose mass sits higher; it needs a lift the geometry alone misses.
-     */
-    transform: translateY(-4px);
+  .affiliation .inria-mark,
+  .affiliation .lighton-mark {
+    width: 56px;
+    height: 20px;
+    border-radius: 0;
+  }
+
+  .affiliation .inria-mark {
+    transform: translateY(-3px);
+  }
+
+  .lighton-mark-dark {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .lighton-mark-light {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .lighton-mark-dark {
+    display: block;
+  }
+
+  .affiliation-divider {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .avatar {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+  }
+
+  .social-links {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    padding: 0.375rem 0.625rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    white-space: nowrap;
+    transition: color var(--transition-base), border-color var(--transition-base), background-color var(--transition-base);
+  }
+
+  .social-icon-box {
+    display: grid;
+    place-items: center;
+    flex: 0 0 17px;
+    width: 17px;
+    height: 17px;
+  }
+
+  .social-link:hover {
+    color: var(--link-color);
+    border-color: var(--border-color-strong);
+    background: var(--hover-bg);
+  }
+
+  .activity {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.75rem;
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 1rem;
+    margin: 0;
+  }
+
+  time {
+    padding-top: 0.1rem;
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    white-space: nowrap;
+  }
+
+  .activity-entry {
+    position: relative;
+    min-width: 0;
+    border-left: 1px solid var(--border-color);
+    padding: 0 0 2.5rem 1.5rem;
+  }
+
+  .activity-entry::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    left: -4px;
+    top: 0.4rem;
+    border-radius: 50%;
+    background: var(--text-muted);
+    box-shadow: 0 0 0 4px var(--bg-color);
+  }
+
+  .timeline-item:first-child .activity-entry::before {
+    background: var(--link-color);
+  }
+
+  .timeline-item:last-child .activity-entry {
+    padding-bottom: 0;
+    border-left-color: transparent;
+  }
+
+  .category {
+    margin: 0 0 0.375rem;
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    line-height: 1.6;
+  }
+
+  .activity-entry h2 {
+    margin: 0 0 0.625rem;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: 1.4;
+    text-wrap: pretty;
+  }
+
+  .entry-description {
+    margin: 0 0 0.625rem;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .entry-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem 1rem;
+  }
+
+  .entry-links a {
+    max-width: 100%;
+    font-size: var(--text-sm);
+    text-wrap: pretty;
+  }
+
+  .entry-links a span {
+    font-size: var(--text-xs);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   @media (max-width: 640px) {
-    .hero {
+    .profile {
+      padding: 0.5rem 0 2.25rem;
+    }
+
+    .profile-heading {
+      grid-template-columns: minmax(0, 1fr) 80px;
       gap: 1rem;
-      padding: 1rem 0 2rem;
-      min-height: calc(100svh - 8rem);
+    }
+
+    h1 {
+      font-size: var(--text-2xl);
     }
 
     .avatar {
-      width: 148px;
-      height: 148px;
+      width: 80px;
+      height: 80px;
     }
 
-    .tagline {
+    .role {
       font-size: var(--text-base);
     }
 
-    .social-link {
-      padding: 0.3rem 0.5rem;
-      font-size: var(--text-xs);
-    }
-  }
-
-  @media (max-width: 400px) {
-    .avatar {
-      width: 128px;
-      height: 128px;
-    }
-
-    .social-links {
+    .timeline-item {
+      position: relative;
+      grid-template-columns: minmax(0, 1fr);
       gap: 0.375rem;
+      padding-left: 1.25rem;
+      border-left: 1px solid var(--border-color);
+      margin-left: 3px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -4px;
+      top: 0.4rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      box-shadow: 0 0 0 4px var(--bg-color);
+    }
+
+    .timeline-item:first-child::before {
+      background: var(--link-color);
+    }
+
+    .timeline-item:last-child {
+      border-left-color: transparent;
+    }
+
+    .activity-entry {
+      padding: 0 0 2rem;
+      border: 0;
+    }
+
+    .activity-entry::before {
+      display: none;
+    }
+
+    .category {
+      margin-bottom: 0.25rem;
     }
   }
 </style>

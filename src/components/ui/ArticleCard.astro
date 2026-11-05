@@ -101,7 +101,11 @@ import SocialIcon from "../SocialIcon.astro";
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     padding: 0.875rem;
-    transition: border-color var(--transition-base);
+    transition: background-color var(--transition-base), border-color var(--transition-base);
+  }
+
+  .project-card:not(.no-border) {
+    background-color: var(--surface-color);
   }
 
   .project-card.clickable:hover {

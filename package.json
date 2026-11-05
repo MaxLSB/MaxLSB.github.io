@@ -15,7 +15,8 @@
     "@fontsource/inter": "^5.1.1",
     "@fontsource/roboto-mono": "^5.1.1",
     "@fontsource/source-sans-pro": "^5.1.0",
-    "astro": "^5.1.2"
+    "astro": "^5.1.2",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241230.0",

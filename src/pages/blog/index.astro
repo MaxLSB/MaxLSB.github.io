@@ -15,7 +15,7 @@ const sortedPosts = posts.sort((a, b) => b.data.publishedAt.getTime() - a.data.p
 
 <BaseLayout title="Blog" description="Read my latest blog posts">
   <Container>
-    <BaseHero title="Blog" description="Read my latest blog posts" />
+    <BaseHero title="Blog" />
     <ContentList>
       {
         sortedPosts.map((post) => (

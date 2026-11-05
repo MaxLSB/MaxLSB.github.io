@@ -1,0 +1,185 @@
+---
+import { Image, getImage } from "astro:assets";
+import type { ActivityPhoto } from "../../data/activity";
+
+interface Props {
+  id: string;
+  photos: ActivityPhoto[];
+  rowAspectRatio?: number;
+}
+
+const { id, photos, rowAspectRatio } = Astro.props;
+const fullImages = await Promise.all(photos.map((photo) => getImage({
+  src: photo.src,
+  width: Math.min(1600, photo.src.width),
+  format: "webp",
+  quality: 85,
+})));
+const ratios = photos.map((photo) => photo.src.width / photo.src.height);
+const remainingRatio = (rowAspectRatio ?? 0) - ratios.reduce((sum, ratio) => sum + ratio, 0);
+// Leave an empty column beside a single photo to match the paired gallery's height.
+if (remainingRatio > 0) ratios.push(remainingRatio);
+const columns = ratios.map((ratio) => `${ratio}fr`).join(" ");
+---
+
+<div class="activity-gallery" style={`--photo-columns: ${columns}`}>
+  {photos.map((photo, index) => (
+    <figure>
+      <a
+        class="photo-link"
+        href={fullImages[index].src}
+        data-photo-dialog={`${id}-dialog`}
+        data-photo-alt={photo.alt}
+        aria-label={`Enlarge photo: ${photo.alt}`}
+      >
+        <Image
+          src={photo.src}
+          alt={photo.alt}
+          width={960}
+          widths={[320, 640, 960]}
+          sizes={photos.length === 1 ? "(max-width: 480px) 90vw, 360px" : "(max-width: 640px) 55vw, 400px"}
+          format="webp"
+          quality={80}
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="enlarge-icon" aria-hidden="true">↗</span>
+      </a>
+    </figure>
+  ))}
+</div>
+
+<dialog id={`${id}-dialog`} class="photo-dialog" aria-label="Conference photo">
+  <button class="close-photo" type="button" aria-label="Close photo">×</button>
+  <figure>
+    <img class="enlarged-photo" alt="" />
+  </figure>
+</dialog>
+
+<script>
+  function initPhotoGalleries() {
+    document.querySelectorAll<HTMLAnchorElement>("[data-photo-dialog]").forEach((link) => {
+      if (link.dataset.bound) return;
+      link.dataset.bound = "true";
+      link.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const dialog = document.getElementById(link.dataset.photoDialog!) as HTMLDialogElement | null;
+        if (!dialog || typeof dialog.showModal !== "function") return;
+        event.preventDefault();
+        const photo = dialog.querySelector<HTMLImageElement>(".enlarged-photo")!;
+        photo.src = link.href;
+        photo.alt = link.dataset.photoAlt ?? "";
+        dialog.showModal();
+      });
+    });
+
+    document.querySelectorAll<HTMLDialogElement>(".photo-dialog").forEach((dialog) => {
+      if (dialog.dataset.bound) return;
+      dialog.dataset.bound = "true";
+      dialog.querySelector(".close-photo")!.addEventListener("click", () => dialog.close());
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    });
+  }
+
+  initPhotoGalleries();
+  document.addEventListener("astro:page-load", initPhotoGalleries);
+</script>
+
+<style>
+  .activity-gallery {
+    display: grid;
+    grid-template-columns: var(--photo-columns);
+    align-items: start;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  figure {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .photo-link {
+    display: block;
+    overflow: hidden;
+    border-radius: 0.375rem;
+    background: var(--bg-color-muted);
+  }
+
+  .photo-link::after {
+    display: none;
+  }
+
+  .photo-link img {
+    width: 100%;
+    height: auto;
+    border-radius: inherit;
+  }
+
+  .enlarge-icon {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.25rem;
+    background: rgb(20 21 24 / 70%);
+    color: #fff;
+    font-size: var(--text-sm);
+  }
+
+  .photo-dialog {
+    position: fixed;
+    inset: 0;
+    width: fit-content;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+    padding: 3.5rem 1rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .photo-dialog::backdrop {
+    background: rgb(0 0 0 / 75%);
+  }
+
+  .close-photo {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  .close-photo:hover {
+    background: var(--hover-bg);
+  }
+
+  .enlarged-photo {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 7rem);
+    margin: auto;
+    object-fit: contain;
+    border-radius: 0.25rem;
+  }
+
+  @media (max-width: 480px) {
+    .activity-gallery {
+      gap: 0.5rem;
+    }
+
+  }
+</style>
