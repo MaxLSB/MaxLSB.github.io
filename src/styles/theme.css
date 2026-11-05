@@ -9,12 +9,13 @@
 :root {
   color-scheme: light;
 
-  --bg-color: #fcfcfb;
+  --bg-color: #f3f3f1;
   --bg-color-muted: #f4f4f2;
+  --surface-color: #fcfcfb;
 
-  --text-color: #23262b; /* 14.8:1 on --bg-color */
-  --text-muted: #5b6470; /*  5.8:1 on --bg-color */
-  --link-color: #1d4ed8; /*  6.5:1 on --bg-color */
+  --text-color: #23262b;
+  --text-muted: #5b6470;
+  --link-color: #1d4ed8;
 
   --border-color: rgba(35, 38, 43, 0.12);
   --border-color-strong: rgba(35, 38, 43, 0.22);
@@ -36,6 +37,7 @@
 
   --bg-color: #141518;
   --bg-color-muted: #1d1f23;
+  --surface-color: #1d1f23;
 
   --text-color: #e4e6e9; /* 14.6:1 on --bg-color */
   --text-muted: #9aa3ae; /*  7.2:1 on --bg-color */

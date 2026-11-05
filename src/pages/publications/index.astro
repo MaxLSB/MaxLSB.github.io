@@ -19,7 +19,7 @@ const sortedPublications = publications.sort((a, b) => sortDate(b) - sortDate(a)
 
 <BaseLayout title="Publications" description="Research papers and academic publications">
   <Container>
-    <BaseHero title="Publications" description="Research papers and academic publications" />
+    <BaseHero title="Publications" />
     <ContentList>
       {
         sortedPublications.map((publication) => {

@@ -34,7 +34,7 @@ const education = [
 
 <BaseLayout title="About Me" description="Learn more about my background and experiences">
   <Container>
-    <BaseHero title="About Me" description="Learn more about my background and experiences" />
+    <BaseHero title="About Me" />
 
     <section class="section" aria-labelledby="experience-heading">
       <h2 id="experience-heading">Experience</h2>
@@ -84,15 +84,21 @@ const education = [
 </BaseLayout>
 
 <style>
+  .section {
+    padding: 1.5rem;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    transition: background-color var(--transition-base), border-color var(--transition-base);
+  }
+
   .section h2 {
     font-size: var(--text-xl);
-    padding-bottom: 0.75rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+    margin: 0 0 1.5rem;
   }
 
   .section + .section {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
   }
 
   .resume-list,
@@ -140,8 +146,12 @@ const education = [
   }
 
   @media (max-width: 640px) {
+    .section {
+      padding: 1rem;
+    }
+
     .section + .section {
-      margin-top: 2.5rem;
+      margin-top: 1rem;
     }
 
     .career-progression {

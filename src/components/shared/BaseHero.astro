@@ -1,15 +1,13 @@
 ---
 interface Props {
   title: string;
-  description: string;
 }
 
-const { title, description } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <header class="hero">
   <h1>{title}</h1>
-  <p class="subtitle">{description}</p>
 </header>
 
 <style>
@@ -22,13 +20,7 @@ const { title, description } = Astro.props;
   }
 
   .hero h1 {
-    margin-bottom: 0.25rem;
-  }
-
-  .subtitle {
-    color: var(--text-muted);
-    font-size: var(--text-lg);
-    margin: 0;
+    margin-bottom: 0;
   }
 
   @media (max-width: 640px) {
@@ -40,8 +32,5 @@ const { title, description } = Astro.props;
       font-size: var(--text-2xl);
     }
 
-    .subtitle {
-      font-size: var(--text-base);
-    }
   }
 </style>
