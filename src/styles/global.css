@@ -29,7 +29,9 @@ html {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Reserve the scrollbar track so short and tall pages align horizontally */
+  /* Keep the viewport width fixed across short and tall pages, including
+     browsers where the custom scrollbar does not reserve a stable gutter. */
+  overflow-y: scroll;
   scrollbar-gutter: stable;
 }
 

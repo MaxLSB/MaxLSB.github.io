@@ -3,7 +3,7 @@ title: "Word2Vec"
 description: "Implementation of word2vec algorithm for learning word embeddings from text corpora using skip-gram and CBOW architectures."
 url: "https://github.com/MaxLSB/word2vec"
 featured: false
-techs: ["NLP", "Embeddings", "PyTorch"]
+techs: ["Natural Language Processing", "Embeddings", "PyTorch"]
 additionalLinks:
   - label: "GitHub"
     url: "https://github.com/MaxLSB/word2vec"
