@@ -22,6 +22,15 @@ interface Activity {
 // Display order is editorial: newest activity first.
 export const activity: Activity[] = [
   {
+    id: "liquid-ai-joined",
+    month: "Nov 2026",
+    datetime: "2026-11",
+    category: "New role",
+    title: "Liquid AI",
+    description: "I joined Liquid AI as a Member of Technical Staff, where I work on post-training.",
+    links: [{ label: "liquid.ai", url: "https://www.liquid.ai/" }],
+  },
+  {
     id: "emnlp-2026",
     month: "Oct 2026",
     datetime: "2026-10",

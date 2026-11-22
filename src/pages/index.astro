@@ -25,18 +25,14 @@ const photoRowAspectRatio = Math.max(...activity.map((item) =>
       <div class="profile-heading">
         <div class="identity">
           <h1 id="profile-name">{site.name}</h1>
-          <p class="role">PhD Student · RL, Agents, Multilinguality</p>
-          <div class="affiliations">
-            <a href="https://www.lighton.ai/" target="_blank" rel="noopener noreferrer" class="affiliation" aria-label="LightOn">
-              <img class="lighton-mark lighton-mark-light" src="/images/LightOn-wordmark.svg" alt="" width="56" height="20" />
-              <img class="lighton-mark lighton-mark-dark" src="/images/LightOn-wordmark-dark.svg" alt="" width="56" height="20" />
+          <p class="role">
+            Member of Technical Staff at
+            <a href="https://www.liquid.ai/" target="_blank" rel="noopener noreferrer" class="affiliation" aria-label="Liquid AI">
+              <img class="liquid-mark liquid-mark-light" src="/images/LiquidAI-wordmark.svg" alt="" width="62" height="20" />
+              <img class="liquid-mark liquid-mark-dark" src="/images/LiquidAI-wordmark-dark.svg" alt="" width="62" height="20" />
             </a>
-            <span class="affiliation-divider" aria-hidden="true">&</span>
-            <a href="https://www.inria.fr/en" target="_blank" rel="noopener noreferrer" class="affiliation">
-              <img class="inria-mark" src="/images/INRIA.svg" alt="" width="56" height="20" />
-              <span class="sr-only">Inria</span>
-            </a>
-          </div>
+            · Post-Training
+          </p>
         </div>
         <img
           class="avatar"
@@ -111,19 +107,10 @@ const photoRowAspectRatio = Math.max(...activity.map((item) =>
     font-size: var(--text-lg);
   }
 
-  .affiliations {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.625rem;
-  }
-
   .affiliation {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--text-color);
-    font-size: var(--text-base);
+    display: inline;
+    margin: 0 0.1em;
+    transition: opacity var(--transition-base);
   }
 
   .affiliation::after {
@@ -131,41 +118,31 @@ const photoRowAspectRatio = Math.max(...activity.map((item) =>
   }
 
   .affiliation:hover {
-    color: var(--link-color);
+    opacity: 0.7;
   }
 
-  .affiliation img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-  }
-
-  .affiliation .inria-mark,
-  .affiliation .lighton-mark {
-    width: 56px;
-    height: 20px;
+  /* The SVG box has built-in padding; sit the glyphs on the text baseline. */
+  .liquid-mark {
+    height: 1.15em;
+    width: auto;
+    vertical-align: -0.22em;
     border-radius: 0;
   }
 
-  .affiliation .inria-mark {
-    transform: translateY(-3px);
+  .liquid-mark-light {
+    display: inline;
   }
 
-  .lighton-mark-dark {
+  .liquid-mark-dark {
     display: none;
   }
 
-  :global([data-theme="dark"]) .lighton-mark-light {
+  :global([data-theme="dark"]) .liquid-mark-light {
     display: none;
   }
 
-  :global([data-theme="dark"]) .lighton-mark-dark {
-    display: block;
-  }
-
-  .affiliation-divider {
-    color: var(--text-muted);
-    font-size: var(--text-sm);
+  :global([data-theme="dark"]) .liquid-mark-dark {
+    display: inline;
   }
 
   .avatar {
