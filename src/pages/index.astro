@@ -43,19 +43,19 @@ const photoRowAspectRatio = Math.max(...activity.map((item) =>
           width="128"
           height="128"
         />
+        {site.socialLinks && (
+          <nav class="social-links" aria-label="Elsewhere">
+            {site.socialLinks.map(({ platform, url }) => (
+              <a href={url} target="_blank" rel="noopener noreferrer" class="social-link">
+                <span class="social-icon-box" aria-hidden="true">
+                  <SocialIcon platform={platform} size={platform.toLowerCase() === "hugging face" ? 17 : 15} />
+                </span>
+                <span>{platform}</span>
+              </a>
+            ))}
+          </nav>
+        )}
       </div>
-      {site.socialLinks && (
-        <nav class="social-links" aria-label="Elsewhere">
-          {site.socialLinks.map(({ platform, url }) => (
-            <a href={url} target="_blank" rel="noopener noreferrer" class="social-link">
-              <span class="social-icon-box" aria-hidden="true">
-                <SocialIcon platform={platform} size={platform.toLowerCase() === "hugging face" ? 17 : 15} />
-              </span>
-              <span>{platform}</span>
-            </a>
-          ))}
-        </nav>
-      )}
     </section>
 
     <section class="activity" aria-label="Recent activity">
@@ -91,8 +91,25 @@ const photoRowAspectRatio = Math.max(...activity.map((item) =>
   .profile-heading {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 112px;
+    grid-template-areas:
+      "identity avatar"
+      "social avatar";
     align-items: center;
-    gap: 2rem;
+    column-gap: 2rem;
+  }
+
+  .identity {
+    grid-area: identity;
+    align-self: end;
+  }
+
+  .avatar {
+    grid-area: avatar;
+  }
+
+  .social-links {
+    grid-area: social;
+    align-self: start;
   }
 
   h1 {
@@ -154,7 +171,7 @@ const photoRowAspectRatio = Math.max(...activity.map((item) =>
   }
 
   .social-links {
-    margin-top: 1.25rem;
+    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -295,7 +312,10 @@ const photoRowAspectRatio = Math.max(...activity.map((item) =>
 
     .profile-heading {
       grid-template-columns: minmax(0, 1fr) 80px;
-      gap: 1rem;
+      grid-template-areas:
+        "identity avatar"
+        "social social";
+      column-gap: 1rem;
     }
 
     h1 {
